@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Pendaftaran Ahli Kariah (SPAK)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <div id="root">
+      <!-- Navbar -->
+      <nav class="bg-green-700 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+          <h1 class="text-xl font-bold">SPAK - Masjid Kampung</h1>
+          <div class="space-x-4">
+            <a href="index.html" class="hover:underline">Utama</a>
+            <a href="daftar.html" class="hover:underline">Pendaftaran</a>
+            <a href="admin.html" class="hover:underline">Admin</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <main class="container mx-auto mt-10 p-4">
+        <div class="text-center bg-white p-10 rounded-2xl shadow-md border border-gray-100">
+          <h2 class="text-3xl font-extrabold text-green-800 mb-4">Selamat Datang ke Sistem Pendaftaran Ahli Kariah</h2>
+          <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Sila daftar maklumat anda dan keluarga untuk memudahkan pengurusan aktiviti dan kebajikan kariah masjid.</p>
+          <div class="flex justify-center gap-4">
+            <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-lg">Mula Mendaftar Sekarang</button>
+            <button class="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 font-semibold py-3 px-8 rounded-full transition duration-300">Semak Pendaftaran</button>
+          </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mt-12">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-50 hover:shadow-md transition">
+            <div class="w-12 h-12 bg-green-100 text-green-700 rounded-lg flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Pendaftaran Mudah</h3>
+            <p class="text-gray-600">Borang pendaftaran yang ringkas dan padat untuk keselesaan anda.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-50 hover:shadow-md transition">
+            <div class="w-12 h-12 bg-green-100 text-green-700 rounded-lg flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04 inter 0 00-7.906 4.674c0 5.92 3.156 10.85 7.618 13.139a11.955 11.955 0 017.618-13.139 12.002 12.002 0 00-7.906-4.674z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Selamat & Peribadi</h3>
+            <p class="text-gray-600">Maklumat anda disimpan dengan selamat untuk kegunaan pengurusan masjid sahaja.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-50 hover:shadow-md transition">
+            <div class="w-12 h-12 bg-green-100 text-green-700 rounded-lg flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Maklumat Terkini</h3>
+            <p class="text-gray-600">Dapatkan maklumat terkini mengenai bantuan dan program kariah masjid.</p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="mt-20 border-t border-gray-200 p-8 text-center text-gray-500">
+        <p>&copy; 2026 Sistem Pendaftaran Ahli Kariah. Hakcipta Terpelihara.</p>
+      </footer>
+    </div>
+  </body>
+</html>

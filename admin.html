@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Pengurusan - Masjid Kampung Sungai Lang Baru</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      .tab-active {
+        border-bottom: 3px solid #166534;
+        color: #166534;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-green-800 text-white p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          <div class="leading-tight">
+            <span class="block text-sm opacity-80 uppercase tracking-widest font-light">Sistem Pengurusan Ahli Kariah</span>
+            <span class="block">Masjid Kampung Sungai Lang Baru</span>
+          </div>
+        </a>
+        <div class="hidden md:flex space-x-6">
+          <a href="index.html" class="hover:text-green-200 transition">Halaman Utama</a>
+          <a href="daftar.html" class="hover:text-green-200 transition">Daftar Ahli</a>
+          <button class="bg-white text-green-800 px-4 py-1 rounded-full text-sm font-bold shadow-sm">Log Keluar</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 p-4">
+      <!-- Welcome Header -->
+      <div class="mb-8 flex justify-between items-end">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Panel Pengurusan Nazir</h1>
+          <p class="text-gray-500 italic text-sm">Sila semak dan sahkan maklumat pendaftaran ahli kariah baharu.</p>
+        </div>
+        <div class="text-right">
+          <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-green-200">Nazir Logged In</span>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-xs text-gray-500 font-bold uppercase mb-1">Total Ahli</p>
+          <div class="flex items-center justify-between">
+            <h3 class="text-3xl font-bold text-gray-800">1,240</h3>
+            <span class="text-green-500 bg-green-50 p-2 rounded-lg text-xs">+3%</span>
+          </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-red-500">
+          <p class="text-xs text-red-500 font-bold uppercase mb-1">Perlu Pengesahan</p>
+          <div class="flex items-center justify-between">
+            <h3 class="text-3xl font-bold text-red-600">08</h3>
+            <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-[10px] font-bold">URGENT</span>
+          </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-xs text-gray-500 font-bold uppercase mb-1">Zon Kariah</p>
+          <h3 class="text-3xl font-bold text-gray-800">05</h3>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-xs text-gray-500 font-bold uppercase mb-1">Status Sistem</p>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="h-3 w-3 bg-green-500 rounded-full animate-pulse"></span>
+            <span class="text-sm font-medium text-gray-700">Aktif & Stabil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Management Area -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+        <!-- Tabs & Filters -->
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex space-x-8 text-sm">
+            <button class="pb-2 tab-active" onclick="filterTable('all')">Semua Ahli</button>
+            <button class="pb-2 text-gray-500 hover:text-green-700 font-medium relative" onclick="filterTable('pending')">
+              Belum Disahkan
+              <span class="absolute -top-2 -right-4 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">8</span>
+            </button>
+            <button class="pb-2 text-gray-500 hover:text-green-700 font-medium" onclick="filterTable('verified')">Telah Disahkan</button>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="search-input" class="px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none w-64" placeholder="Cari Nama / No. IC...">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm rounded-lg flex items-center gap-2 transition" onclick="alert('Membuka borang susunan susun...')">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+              </svg>
+              Susunan
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-bold tracking-wider">
+              <tr>
+                <th class="px-6 py-4">Ahli</th>
+                <th class="px-6 py-4">Maklumat Hubungi</th>
+                <th class="px-6 py-4">Tanggungan</th>
+                <th class="px-6 py-4">Status Nazir</th>
+                <th class="px-6 py-4 text-right">Tindakan Pengurusan</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100" id="member-table-body">
+              <!-- Baris Ahli 1 (Pending) -->
+              <tr class="hover:bg-gray-50 transition member-row" data-status="pending">
+                <td class="px-6 py-4">
+                  <div class="flex flex-col">
+                    <span class="font-bold text-gray-800">MOHAMMAD SYAHMI BIN ROSLAN</span>
+                    <span class="text-xs text-gray-500 font-mono tracking-tighter">950412-10-5541</span>
+                    <span class="text-[10px] mt-1 bg-gray-100 text-gray-600 px-2 py-0.5 rounded self-start">Zon 2 - Jalan Utama</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="text-sm">
+                    <div class="flex items-center gap-1 text-gray-700"><svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 004.812 4.812l.773-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg> 011-23456789</div>
+                    <div class="text-xs text-gray-400 mt-0.5 italic">Daftar: 05/04/2026</div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="text-sm font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">5 Orang</span>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="flex items-center gap-1 text-red-600 text-xs font-bold px-3 py-1 rounded-full bg-red-50 border border-red-100 w-fit">
+                    <span class="h-2 w-2 bg-red-600 rounded-full"></span> BELUM DISAHKAN
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button class="bg-green-600 hover:bg-green-700 text-white text-xs px-4 py-2 rounded-lg font-bold shadow-sm transition" onclick="showChecklist('SYAHMI')">
+                    Semakan Nazir
+                  </button>
+                  <button class="text-gray-400 hover:text-red-600 p-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                </td>
+              </tr>
+              <!-- Baris Ahli 2 (Verified) -->
+              <tr class="hover:bg-gray-50 transition member-row" data-status="verified">
+                <td class="px-6 py-4">
+                  <div class="flex flex-col">
+                    <span class="font-bold text-gray-800">HAJI IBRAHIM BIN MUSA</span>
+                    <span class="text-xs text-gray-500 font-mono tracking-tighter">600101-08-4431</span>
+                    <span class="text-[10px] mt-1 bg-gray-100 text-gray-600 px-2 py-0.5 rounded self-start">Zon 1 - Lorong Masjid</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="text-sm">
+                    <div class="flex items-center gap-1 text-gray-700"><svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 004.812 4.812l.773-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg> 012-99887766</div>
+                    <div class="text-xs text-gray-400 mt-0.5 italic">Daftar: 01/04/2026</div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="text-sm font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">2 Orang</span>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="flex items-center gap-1 text-green-700 text-xs font-bold px-3 py-1 rounded-full bg-green-50 border border-green-100 w-fit">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> DISAHKAN
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <a href="sijil.html?name=HAJI IBRAHIM BIN MUSA&ic=600101-08-4431&water=AS-11223344" class="bg-gray-100 text-green-700 text-xs px-4 py-2 rounded-lg font-bold hover:bg-green-50 border border-green-200 shadow-sm transition inline-block">
+                    Cetak Sijil
+                  </a>
+                  <button class="bg-gray-100 text-gray-700 text-xs px-4 py-2 rounded-lg font-bold hover:bg-gray-200 shadow-sm transition ml-2">
+                    Kemaskini
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Checklist (Simulasi) -->
+    <div id="modal-checklist" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+        <div class="bg-green-700 p-4 text-white">
+          <h3 class="font-bold flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Semakan & Checklist Nazir
+          </h3>
+        </div>
+        <div class="p-6 space-y-4">
+          <p class="text-sm text-gray-600">Sila tandakan semakan di bawah sebelum pengesahan data <strong id="modal-name">SYAHMI</strong> ke dalam sistem induk.</p>
+          <div class="space-y-3">
+            <label class="flex items-start gap-3 p-3 border rounded-xl hover:bg-gray-50 cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+              <div class="text-sm">
+                <span class="font-bold block">Kesahihan No. Kad Pengenalan</span>
+                <span class="text-xs text-gray-400 italic">No. IC mestilah 12 digit dan unik.</span>
+              </div>
+            </label>
+            <label class="flex items-start gap-3 p-3 border rounded-xl hover:bg-gray-50 cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+              <div class="text-sm">
+                <span class="font-bold block">Status Penduduk Kariah</span>
+                <span class="text-xs text-gray-400 italic">Sahkan ahli tinggal dalam zon kariah Sungai Lang Baru.</span>
+              </div>
+            </label>
+            <label class="flex items-start gap-3 p-3 border rounded-xl hover:bg-gray-50 cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+              <div class="text-sm">
+                <span class="font-bold block">Jumlah Tanggungan Keluarga</span>
+                <span class="text-xs text-gray-400 italic">Bilangan anak & pasangan adalah munasabah.</span>
+              </div>
+            </label>
+          </div>
+          <div class="pt-4 flex gap-2">
+            <button class="flex-1 bg-green-700 text-white font-bold py-2 rounded-xl hover:bg-green-800 transition shadow-lg" onclick="confirmVerify()">SAHKAN DATA</button>
+            <button class="flex-1 bg-gray-100 text-gray-600 font-bold py-2 rounded-xl hover:bg-gray-200 transition" onclick="closeChecklist()">BATAL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-12 border-t border-gray-200 p-8 text-center text-gray-400 text-xs">
+      <p>Sistem E-Media Masjid &copy; 2026 - Masjid Kampung Sungai Lang Baru</p>
+      <p class="mt-1 uppercase tracking-widest">Satu Kariah Satu Hati</p>
+    </footer>
+
+    <script>
+      function showChecklist(name) {
+        document.getElementById('modal-name').innerText = name;
+        document.getElementById('modal-checklist').classList.remove('hidden');
+      }
+
+      function closeChecklist() {
+        document.getElementById('modal-checklist').classList.add('hidden');
+      }
+
+      function confirmVerify() {
+        alert('Data telah disahkan oleh Nazir dan dipindahkan ke senarai utama.');
+        closeChecklist();
+      }
+
+      function filterTable(status) {
+        const rows = document.querySelectorAll('.member-row');
+        const buttons = document.querySelectorAll('.pb-2');
+        
+        // Update tabs styling
+        buttons.forEach(btn => btn.classList.remove('tab-active', 'text-green-700'));
+        event.target.classList.add('tab-active');
+
+        rows.forEach(row => {
+          if (status === 'all') {
+            row.style.display = '';
+          } else if (row.getAttribute('data-status') === status) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      }
+
+      // Search functionality
+      document.getElementById('search-input').addEventListener('keyup', function() {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll('.member-row');
+        rows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          row.style.display = text.includes(filter) ? '' : 'none';
+        });
+      });
+    </script>
+  </body>
+</html>

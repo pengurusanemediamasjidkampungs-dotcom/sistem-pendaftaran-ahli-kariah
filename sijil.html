@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sijil Keahlian - Masjid Kampung Sungai Lang Baru</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap');
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f3f4f6;
+      }
+      .certificate-border {
+        border: 15px double #166534;
+        padding: 40px;
+        background: white;
+        position: relative;
+      }
+      .certificate-title {
+        font-family: 'Playfair Display', serif;
+      }
+      @media print {
+        body { background: white; }
+        .no-print { display: none; }
+        .certificate-container { margin: 0; box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center min-h-screen p-4">
+    <div class="no-print fixed top-5 right-5 flex gap-2">
+      <button onclick="window.print()" class="bg-green-700 text-white px-6 py-2 rounded-lg font-bold shadow-lg hover:bg-green-800 transition">Cetak Sijil</button>
+      <a href="admin.html" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-300 transition">Kembali</a>
+    </div>
+
+    <div class="certificate-container bg-white shadow-2xl max-w-4xl w-full">
+      <div class="certificate-border">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h2 class="text-green-800 text-xl font-bold uppercase tracking-widest mb-1">Masjid Kampung Sungai Lang Baru</h2>
+          <p class="text-gray-500 text-xs italic">42700 Banting, Selangor Darul Ehsan</p>
+          <hr class="mt-4 border-green-200">
+        </div>
+
+        <!-- Title -->
+        <div class="text-center mb-10">
+          <h1 class="certificate-title text-4xl text-gray-800 mb-2">Sijil Keahlian Kariah</h1>
+          <p class="text-gray-600 italic">Dengan ini disahkan bahawa:</p>
+        </div>
+
+        <!-- Member Content -->
+        <div class="text-center space-y-6 mb-12">
+          <div>
+            <h3 class="text-3xl font-bold text-gray-900 underline decoration-green-600" id="cert-name">MOHAMMAD SYAHMI BIN ROSLAN</h3>
+            <p class="text-gray-500 mt-1">NO. KP: <span id="cert-ic">950412-10-5541</span></p>
+          </div>
+
+          <div class="max-w-md mx-auto">
+            <p class="text-gray-700 leading-relaxed">
+              Adalah ahli kariah berdaftar di <strong>Masjid Kampung Sungai Lang Baru</strong>. Maklumat ini telah disemak dan direkodkan dalam pangkalan data e-media masjid.
+            </p>
+          </div>
+
+          <div class="bg-green-50 p-4 rounded-xl border border-green-100 inline-block">
+            <p class="text-sm font-bold text-green-800 uppercase tracking-wider">No. Pendaftaran Bil Air</p>
+            <p class="text-2xl font-mono text-gray-800" id="cert-water-bill">AS-887766554</p>
+          </div>
+        </div>
+
+        <!-- Verification Footer -->
+        <div class="grid grid-cols-3 items-end mt-16">
+          <div class="text-center">
+            <p class="text-xs text-gray-400 mb-2">Disahkan Pada:</p>
+            <p class="font-bold border-b border-gray-300 pb-1" id="cert-date">07 April 2026</p>
+          </div>
+          
+          <div class="text-center flex flex-col items-center">
+            <div class="bg-gray-100 p-2 border-2 border-green-700 rounded-lg mb-2">
+              <!-- Placeholder QR Code -->
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=VERIFIED-SPAK-SYAHMI-2026" alt="QR Code Pengesahan">
+            </div>
+            <p class="text-[10px] text-gray-400 uppercase tracking-tighter">Imbas Untuk Pengesahan</p>
+          </div>
+
+          <div class="text-center">
+            <div class="mb-2 h-16 flex items-end justify-center">
+              <span class="text-gray-300 italic">Tandatangan Nazir</span>
+            </div>
+            <p class="font-bold border-t border-gray-300 pt-1 text-sm uppercase">Nazir / Pengurus Masjid</p>
+          </div>
+        </div>
+
+        <!-- Footer Motto -->
+        <div class="mt-12 text-center">
+          <p class="text-green-800 font-bold uppercase tracking-[0.3em] text-[10px]">Satu Kariah Satu Hati</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simulasi mengambil data dari URL (Contoh: sijil.html?name=SYAHMI&ic=9504...)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('name')) document.getElementById('cert-name').innerText = urlParams.get('name');
+      if (urlParams.has('ic')) document.getElementById('cert-ic').innerText = urlParams.get('ic');
+      if (urlParams.has('water')) document.getElementById('cert-water-bill').innerText = urlParams.get('water');
+    </script>
+  </body>
+</html>
