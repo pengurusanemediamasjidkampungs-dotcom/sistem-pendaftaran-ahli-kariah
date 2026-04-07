@@ -28,6 +28,7 @@
         from { opacity: 0; transform: translateX(20px); }
         to { opacity: 1; transform: translateX(0); }
       }
+      input:focus, textarea:focus { border-color: #006400 !important; ring: 1px ring #006400; }
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
@@ -36,13 +37,13 @@
       <div class="container mx-auto flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-3">
           <img src="logo_masjid.png" alt="MKSLB" class="h-10 w-auto" onerror="this.src='https://via.placeholder.com/40x40?text=MKSLB'">
-          <span class="font-extrabold text-sm md:text-base uppercase tracking-tighter">MKSLB - Pendaftaran Ahli</span>
+          <span class="font-extrabold text-sm md:text-base uppercase tracking-tighter">MKSLB - Pendaftaran</span>
         </a>
-        <a href="https://mkslb.com" class="text-[10px] font-bold hover:text-masjidGold transition uppercase tracking-[0.2em] hidden md:block border-b-2 border-masjidGold">Kembali ke mkslb.com</a>
+        <a href="index.html" class="text-[10px] font-bold hover:text-masjidGold transition uppercase tracking-[0.2em] border-b-2 border-masjidGold">Batal</a>
       </div>
     </nav>
 
-    <main class="container mx-auto mt-6 p-4 max-w-2xl">
+    <main class="container mx-auto mt-6 p-4 max-w-2xl mb-20">
       <!-- Progress Bar -->
       <div class="mb-8">
         <div class="flex justify-between mb-2">
@@ -55,118 +56,227 @@
       </div>
 
       <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
-        <form id="multi-step-form" class="p-6 md:p-10">
+        <!-- Notis Loading (Hidden by default) -->
+        <div id="loadingOverlay" class="hidden absolute inset-0 bg-white/80 z-50 flex flex-col items-center justify-center p-6 text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-masjidGreen mb-4"></div>
+            <p class="font-bold text-masjidGreen">Menghantar Maklumat...</p>
+            <p class="text-xs text-gray-500">Sila jangan tutup paparan ini.</p>
+        </div>
+
+        <form id="multi-step-form" class="p-6 md:p-10 relative">
           
           <!-- Step 1: Maklumat Peribadi -->
           <div id="step-1" class="step-active space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter">Maklumat Peribadi Ketua</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter text-center md:text-left">Maklumat Peribadi</h3>
             <div class="space-y-4">
               <div>
                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Penuh (Seperti dalam IC)</label>
-                <input type="text" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none uppercase font-semibold text-gray-700" placeholder="AHMAD BIN ALI" required>
+                <input type="text" id="nama" name="nama" class="w-full p-4 border border-gray-200 rounded-2xl outline-none uppercase font-semibold text-gray-700 bg-gray-50" placeholder="CONTOH: AHMAD BIN ALI" required>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Kad Pengenalan</label>
-                  <input type="text" id="ic_no" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-mono" placeholder="880101015541" maxlength="12" pattern="\d{12}" required>
+                  <input type="number" id="ic" name="ic" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-mono bg-gray-50" placeholder="880101105541" required>
                 </div>
                 <div>
-                  <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Telefon</label>
-                  <input type="tel" id="phone_no" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-mono" placeholder="0123456789" required>
+                  <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Telefon (WhatsApp)</label>
+                  <input type="tel" id="telefon" name="telefon" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-mono bg-gray-50" placeholder="0123456789" required>
                 </div>
               </div>
               <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Pendaftaran Bil Air (Air Selangor)</label>
-                <input type="text" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-mono" placeholder="Contoh: 123456789" required>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Akaun Bil Air (Air Selangor)</label>
+                <input type="text" id="bil_air" name="bil_air" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-mono bg-gray-50" placeholder="Contoh: 1700123456" required>
               </div>
             </div>
             <div class="pt-4">
-              <button type="button" onclick="nextStep(2)" class="w-full bg-masjidGreen text-white font-extrabold py-5 rounded-2xl shadow-xl hover:bg-masjidDark transition uppercase tracking-[0.2em] text-xs">Seterusnya</button>
+              <button type="button" onclick="validateStep1()" class="w-full bg-masjidGreen text-white font-extrabold py-5 rounded-2xl shadow-xl hover:bg-masjidDark transition uppercase tracking-[0.2em] text-xs">Seterusnya</button>
             </div>
           </div>
 
-          <!-- Step 2: Maklumat Keluarga & Kediaman -->
+          <!-- Step 2: Kediaman & Lokasi -->
           <div id="step-2" class="step-hidden space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter">Kediaman & Keluarga</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter text-center md:text-left">Kediaman & Lokasi</h3>
             <div class="space-y-4">
               <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Alamat Kediaman (MKSLB)</label>
-                <textarea rows="3" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-semibold text-gray-700 uppercase" placeholder="No. 12, Jalan Utama..."></textarea>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Alamat Penuh Rumah</label>
+                <textarea id="alamat" name="alamat" rows="3" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-semibold text-gray-700 uppercase bg-gray-50" placeholder="No. 12, Jalan Utama, Kg Sg Lang Baru..." required></textarea>
               </div>
-              <div class="p-5 bg-green-50 rounded-2xl border border-green-100">
-                <p class="text-[10px] font-extrabold text-masjidGreen mb-3 uppercase tracking-widest flex items-center gap-2">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-                  Lokasi Rumah (GPS)
-                </p>
-                <button type="button" class="w-full bg-white border-2 border-masjidGreen text-masjidGreen text-[10px] font-extrabold py-3 px-4 rounded-xl hover:bg-masjidGreen hover:text-white transition uppercase tracking-widest">Pin Lokasi GPS</button>
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Jumlah Tanggungan</label>
-                <input type="number" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="0">
+              <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Lot (JUPEM)</label>
+                    <input type="text" id="no_lot" name="no_lot" class="w-full p-4 border border-gray-200 rounded-2xl outline-none uppercase bg-gray-50 font-mono text-sm" placeholder="LOT 1234" required>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Koordinat GPS</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="coordsDisplay" readonly class="w-full p-4 border border-gray-200 rounded-2xl outline-none bg-gray-100 font-mono text-[10px]" placeholder="Lat, Lng">
+                        <button type="button" onclick="getLocation()" class="bg-masjidGreen text-white px-4 rounded-2xl text-[10px] font-bold hover:bg-masjidDark transition uppercase">PIN</button>
+                    </div>
+                    <!-- Hidden inputs for Lat/Lng -->
+                    <input type="hidden" id="lat" name="lat">
+                    <input type="hidden" id="lng" name="lng">
+                  </div>
               </div>
             </div>
             <div class="pt-4 flex gap-3">
-              <button type="button" onclick="nextStep(1)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
-              <button type="button" onclick="nextStep(3)" class="flex-2 bg-masjidGreen text-white font-extrabold py-4 px-10 rounded-2xl shadow-xl hover:bg-masjidDark transition uppercase text-[10px] tracking-widest">Seterusnya</button>
+              <button type="button" onclick="goToStep(1)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
+              <button type="button" onclick="validateStep2()" class="flex-2 bg-masjidGreen text-white font-extrabold py-4 px-10 rounded-2xl shadow-xl hover:bg-masjidDark transition uppercase text-[10px] tracking-widest">Seterusnya</button>
             </div>
           </div>
 
-          <!-- Step 3: Dokumen & PDPA -->
+          <!-- Step 3: Pengesahan & PDPA -->
           <div id="step-3" class="step-hidden space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter">Pengesahan Akhir</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter text-center md:text-left">Pengesahan Akhir</h3>
             <div class="space-y-4">
-              <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Muat Naik Gambar IC (Depan)</label>
-                <input type="file" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-6 file:rounded-full file:border-0 file:text-[10px] file:font-bold file:bg-green-50 file:text-masjidGreen hover:file:bg-green-100">
+              <div class="p-6 bg-green-50 rounded-3xl border-2 border-dashed border-green-200 text-center">
+                <p class="text-[10px] text-masjidGreen font-bold uppercase tracking-widest mb-2 text-center">Ringkasan Pendaftaran</p>
+                <div id="summary" class="text-[11px] text-gray-600 space-y-1 text-left">
+                    <!-- Summary injected by JS -->
+                </div>
               </div>
               <div class="pt-4 p-5 bg-gray-50 rounded-2xl border border-gray-200">
                 <label class="flex items-start gap-4 cursor-pointer">
-                  <input type="checkbox" class="mt-1 w-6 h-6 text-masjidGreen rounded-lg focus:ring-masjidGreen border-gray-300" required>
+                  <input type="checkbox" id="pdpa" class="mt-1 w-6 h-6 text-masjidGreen rounded-lg focus:ring-masjidGreen border-gray-300" required>
                   <span class="text-[10px] text-gray-500 leading-relaxed font-medium uppercase tracking-tighter">
-                    SAYA DENGAN INI BERSETUJU MEMBERIKAN MAKLUMAT INI UNTUK KEGUNAAN PIHAK <strong>MASJID KAMPUNG SUNGAI LANG BARU (MKSLB)</strong> SAHAJA BAGI TUJUAN PENGURUSAN KARIAH MENGIKUT <strong>AKTA PERLINDUNGA DATA PERIBADI 2010 (PDPA)</strong>.
+                    SAYA MENGESAHKAN SEMUA MAKLUMAT ADALAH BENAR DAN BERSETUJU MEMBERIKAN MAKLUMAT INI UNTUK KEGUNAAN PIHAK <strong>MASJID KAMPUNG SUNGAI LANG BARU (MKSLB)</strong> SAHAJA MENGIKUT <strong>AKTA PDPA 2010</strong>.
                   </span>
                 </label>
               </div>
             </div>
             <div class="pt-6 flex gap-3">
-              <button type="button" onclick="nextStep(2)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
-              <button type="submit" class="flex-2 bg-masjidGold text-masjidGreen font-extrabold py-4 px-10 rounded-2xl shadow-2xl hover:scale-105 transition uppercase text-[10px] tracking-widest">Hantar Pendaftaran</button>
+              <button type="button" onclick="goToStep(2)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
+              <button type="submit" id="finalSubmitBtn" class="flex-2 bg-masjidGold text-masjidGreen font-extrabold py-4 px-10 rounded-2xl shadow-2xl hover:scale-105 transition uppercase text-[10px] tracking-widest">Hantar Pendaftaran</button>
             </div>
           </div>
         </form>
+
+        <!-- Success Screen -->
+        <div id="successScreen" class="hidden p-10 text-center space-y-6">
+            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-extrabold text-masjidGreen uppercase">Pendaftaran Berjaya!</h3>
+            <p class="text-sm text-gray-500 max-w-xs mx-auto">Terima kasih. Maklumat anda telah selamat disimpan dalam pangkalan data kariah MKSLB.</p>
+            <a href="index.html" class="inline-block bg-masjidGreen text-white font-bold py-4 px-8 rounded-2xl uppercase text-xs tracking-widest">Kembali ke Utama</a>
+        </div>
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-20 bg-gray-900 text-gray-500 py-12 px-4 border-t-4 border-masjidGold">
-      <div class="container mx-auto text-center">
-        <p class="text-white font-bold mb-1 uppercase tracking-[0.2em] text-xs">Masjid Kampung Sungai Lang Baru (MKSLB)</p>
-        <p class="text-[10px] mb-2 uppercase">Kampung Sungai Lang Baru, 42700 Banting, Selangor</p>
-        <p class="text-[10px] mb-8 font-bold text-masjidGold">HUBUNGI: 03-3181 1994</p>
-        <p class="text-[9px] opacity-30 leading-relaxed uppercase max-w-md mx-auto">
-          Sistem Pendaftaran Ahli Kariah Digital MKSLB mematuhi piawaian perlindungan data peribadi kebangsaan.
-        </p>
-      </div>
+    <footer class="bg-gray-900 text-gray-500 py-12 px-4 border-t-4 border-masjidGold">
+        <div class="container mx-auto text-center">
+          <p class="text-white font-bold mb-1 uppercase tracking-[0.2em] text-xs">Masjid Kampung Sungai Lang Baru (MKSLB)</p>
+          <p class="text-[9px] opacity-30 leading-relaxed uppercase max-w-md mx-auto">
+            Sistem Pendaftaran Digital MKSLB &copy; 2026.
+          </p>
+        </div>
     </footer>
 
     <script>
-      function nextStep(step) {
-        if (step === 2) {
-          const ic = document.getElementById('ic_no').value;
-          if (ic.length !== 12) { alert('Sila masukkan 12 digit No. KP tanpa sempang.'); return; }
-        }
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzV8lhqZ_Ij_tK92MVbYaorq8iQ1wvMQIGNZLzLoALiV7Rn75DoBVnzwwktv6UO7_kYug/exec';
+      const form = document.getElementById('multi-step-form');
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      const successScreen = document.getElementById('successScreen');
+
+      // Fungsi Navigasi Langkah
+      function goToStep(step) {
         document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.replace('step-active', 'step-hidden'));
         document.getElementById('step-' + step).classList.replace('step-hidden', 'step-active');
-        const indicators = ["Maklumat Peribadi", "Kediaman & Keluarga", "Dokumen & PDPA"];
+        
+        const indicators = ["Maklumat Peribadi", "Kediaman & Lokasi", "Pengesahan Akhir"];
         document.getElementById('step-indicator').innerText = "Langkah " + step + ": " + indicators[step-1];
         document.getElementById('step-count').innerText = step + " / 3";
         document.getElementById('progress-bar').style.width = (step / 3 * 100) + "%";
         window.scrollTo(0, 0);
+
+        if(step === 3) generateSummary();
       }
-      document.getElementById('multi-step-form').addEventListener('submit', (e) => {
+
+      // Validasi Langkah 1
+      function validateStep1() {
+          const ic = document.getElementById('ic').value;
+          const nama = document.getElementById('nama').value;
+          const tel = document.getElementById('telefon').value;
+          if(nama && ic.length >= 12 && tel) {
+              goToStep(2);
+          } else {
+              alert("Sila lengkapkan Nama, 12-Digit IC dan No Telefon.");
+          }
+      }
+
+      // Validasi Langkah 2
+      function validateStep2() {
+          const alamat = document.getElementById('alamat').value;
+          const lot = document.getElementById('no_lot').value;
+          if(alamat && lot) {
+              goToStep(3);
+          } else {
+              alert("Sila masukkan Alamat dan No Lot.");
+          }
+      }
+
+      // Fungsi Ambil Lokasi GPS
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                document.getElementById('lat').value = pos.coords.latitude;
+                document.getElementById('lng').value = pos.coords.longitude;
+                document.getElementById('coordsDisplay').value = pos.coords.latitude.toFixed(6) + ", " + pos.coords.longitude.toFixed(6);
+                alert("Lokasi berjaya dikesan!");
+              }, 
+              () => alert("Sila hidupkan GPS anda.")
+          );
+        }
+      }
+
+      // Ringkasan Data
+      function generateSummary() {
+          const html = `
+            <p><strong>NAMA:</strong> ${document.getElementById('nama').value.toUpperCase()}</p>
+            <p><strong>IC:</strong> ${document.getElementById('ic').value}</p>
+            <p><strong>TEL:</strong> ${document.getElementById('telefon').value}</p>
+            <p><strong>LOT:</strong> ${document.getElementById('no_lot').value.toUpperCase()}</p>
+          `;
+          document.getElementById('summary').innerHTML = html;
+      }
+
+      // Submit Form
+      form.addEventListener('submit', e => {
         e.preventDefault();
-        alert('Terima kasih! Maklumat anda telah dihantar ke sistem MKSLB untuk pengesahan Nazir.');
-        window.location.href = 'index.html';
+        if(!document.getElementById('pdpa').checked) return;
+
+        loadingOverlay.classList.remove('hidden');
+
+        const payload = {
+          nama: document.getElementById('nama').value,
+          ic: document.getElementById('ic').value,
+          telefon: document.getElementById('telefon').value,
+          bil_air: document.getElementById('bil_air').value,
+          alamat: document.getElementById('alamat').value,
+          no_lot: document.getElementById('no_lot').value,
+          lat: document.getElementById('lat').value,
+          lng: document.getElementById('lng').value
+        };
+
+        fetch(scriptURL, { 
+            method: 'POST', 
+            mode: 'no-cors', 
+            body: JSON.stringify(payload) 
+        })
+        .then(() => {
+            loadingOverlay.classList.add('hidden');
+            form.classList.add('hidden');
+            document.getElementById('progress-bar').parentElement.parentElement.classList.add('hidden');
+            successScreen.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        })
+        .catch(err => {
+            loadingOverlay.classList.add('hidden');
+            alert("Ralat berlaku. Sila cuba lagi.");
+            console.error(err);
+        });
       });
     </script>
   </body>
