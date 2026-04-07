@@ -4,121 +4,193 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sijil Keahlian MKSLB</title>
+    <link rel="icon" type="image/png" href="logo_masjid.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap');
+      
       body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f8f9fa;
+        background-color: #f1f5f9;
       }
-      .certificate-border {
-        border: 10px solid #006400;
-        outline: 2px solid #FFD700;
-        outline-offset: -20px;
-        padding: 60px;
+
+      .certificate-container {
+        width: 210mm; /* Standard A4 Width */
+        min-height: 297mm; /* Standard A4 Height */
         background: white;
+        margin: 20px auto;
+        box-shadow: 0 0 50px rgba(0,0,0,0.1);
+      }
+
+      .certificate-border {
+        border: 15px solid #006400;
+        outline: 3px solid #FFD700;
+        outline-offset: -25px;
+        padding: 80px 60px;
+        height: 100%;
         position: relative;
         background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
       }
+
       .certificate-title {
         font-family: 'Playfair Display', serif;
         color: #006400;
       }
-      .gold-accent { color: #d4af37; }
+
       @media print {
-        body { background: white; }
+        body { background: white; padding: 0; margin: 0; }
         .no-print { display: none; }
-        .certificate-container { margin: 0; box-shadow: none; border: none; }
+        .certificate-container { 
+            margin: 0; 
+            box-shadow: none; 
+            width: 100%; 
+            height: 100%;
+        }
+        @page {
+            size: A4;
+            margin: 0;
+        }
+      }
+
+      /* Efek tera (Watermark) */
+      .watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.04;
+        width: 450px;
+        pointer-events: none;
+        z-index: 0;
       }
     </style>
   </head>
-  <body class="flex items-center justify-center min-h-screen p-4 md:p-10">
-    <div class="no-print fixed top-5 right-5 flex gap-2">
-      <button onclick="window.print()" class="bg-green-800 text-white px-8 py-3 rounded-full font-bold shadow-xl hover:bg-green-900 transition flex items-center gap-2">
+  <body class="flex flex-col items-center justify-center min-h-screen">
+
+    <!-- Floating Buttons (No Print) -->
+    <div class="no-print mb-6 mt-6 flex gap-4">
+      <a href="admin.html" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-2xl font-bold hover:bg-gray-300 transition flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Kembali ke Admin
+      </a>
+      <button onclick="window.print()" class="bg-masjidGreen text-white px-8 py-3 rounded-2xl font-bold shadow-xl hover:bg-masjidDark transition flex items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
         </svg>
-        Cetak Sijil
+        Cetak Sijil Sekarang
       </button>
-      <a href="admin.html" class="bg-white text-gray-400 px-8 py-3 rounded-full font-bold hover:text-gray-600 transition border border-gray-200">Kembali</a>
     </div>
 
-    <div class="certificate-container bg-white shadow-2xl max-w-4xl w-full border border-gray-100">
-      <div class="certificate-border">
-        <!-- Watermark/Logo Background -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-          <img src="logo_masjid.png" alt="" class="w-96" onerror="this.src='https://via.placeholder.com/300?text=MKSLB'">
-        </div>
+    <!-- Certificate Card -->
+    <div class="certificate-container relative overflow-hidden">
+      
+      <div class="certificate-border h-full flex flex-col justify-between">
+        
+        <!-- Watermark -->
+        <img src="logo_masjid.png" class="watermark" alt="" onerror="this.style.display='none'">
 
         <!-- Header -->
-        <div class="text-center mb-10 relative">
-          <img src="logo_masjid.png" alt="Logo MKSLB" class="h-20 mx-auto mb-4" onerror="this.src='https://via.placeholder.com/80x80?text=MKSLB'">
-          <h2 class="text-[#006400] text-xl font-extrabold uppercase tracking-[0.2em] mb-1">Masjid Kampung Sungai Lang Baru</h2>
-          <p class="text-gray-400 text-[10px] uppercase tracking-widest font-bold">42700 Banting, Selangor Darul Ehsan</p>
-          <div class="flex justify-center mt-4">
-            <div class="h-1 w-20 bg-[#FFD700]"></div>
+        <div class="text-center z-10">
+          <img src="logo_masjid.png" alt="Logo MKSLB" class="h-28 mx-auto mb-6" onerror="this.src='https://via.placeholder.com/100x100?text=MKSLB'">
+          <h2 class="text-2xl font-black text-masjidGreen uppercase tracking-[0.3em] mb-1">Masjid Kampung Sungai Lang Baru</h2>
+          <p class="text-gray-400 text-xs uppercase tracking-widest font-bold">Kampung Sungai Lang Baru, 42700 Banting, Selangor</p>
+          <div class="flex justify-center mt-6">
+            <div class="h-1 w-32 bg-masjidGold rounded-full"></div>
           </div>
         </div>
 
-        <!-- Title -->
-        <div class="text-center mb-12 relative">
-          <h1 class="certificate-title text-5xl mb-4">Sijil Keahlian Kariah</h1>
-          <p class="text-gray-500 italic font-light tracking-wide">Dengan ini diperakui dan disahkan bahawa:</p>
-        </div>
-
-        <!-- Member Content -->
-        <div class="text-center space-y-8 mb-16 relative">
-          <div>
-            <h3 class="text-4xl font-extrabold text-gray-900 border-b-2 border-dashed border-gray-200 pb-2 inline-block px-10 uppercase" id="cert-name">MOHAMMAD SYAHMI BIN ROSLAN</h3>
-            <p class="text-gray-400 mt-4 font-mono text-sm tracking-widest">NO. KAD PENGENALAN: <span id="cert-ic" class="text-gray-800">950412-10-5541</span></p>
+        <!-- Body Content -->
+        <div class="text-center z-10 flex-grow flex flex-col justify-center py-10">
+          <h1 class="certificate-title text-6xl mb-6">Sijil Keahlian Kariah</h1>
+          <p class="text-gray-500 italic mb-12">Dengan ini diperakui dan disahkan secara rasmi bahawa:</p>
+          
+          <div class="mb-12">
+            <h3 class="text-4xl font-black text-gray-900 border-b-4 border-double border-masjidGold inline-block px-12 pb-2 uppercase tracking-tight" id="cert-name">
+              MOHAMMAD SYAHMI BIN ROSLAN
+            </h3>
+            <p class="text-gray-400 mt-6 font-mono text-sm tracking-[0.2em] uppercase">No. Kad Pengenalan: <span id="cert-ic" class="text-gray-800 font-bold">950412-10-5541</span></p>
           </div>
 
-          <div class="max-w-lg mx-auto">
+          <div class="max-w-2xl mx-auto mb-12">
             <p class="text-gray-600 leading-relaxed text-sm">
-              Adalah ahli kariah yang telah berdaftar secara rasmi di <strong>Masjid Kampung Sungai Lang Baru</strong>. Maklumat beliau telah direkodkan dalam pangkalan data e-media masjid bagi tujuan pengurusan kebajikan dan khairat kematian.
+                Telah berdaftar secara rasmi sebagai ahli kariah dalam pangkalan data digital <strong>Masjid Kampung Sungai Lang Baru</strong>. Sijil ini memperakui penglibatan beliau dalam urusan kebajikan, kemasyarakatan, serta khairat kematian di bawah seliaan kariah ini.
             </p>
           </div>
 
-          <div class="bg-gray-50 p-6 rounded-3xl border border-gray-100 inline-block shadow-inner">
-            <p class="text-[10px] font-bold text-[#006400] uppercase tracking-[0.2em] mb-2">No. Pendaftaran Bil Air</p>
-            <p class="text-3xl font-mono text-gray-800 font-bold" id="cert-water-bill text-[#d4af37]">AS-887766554</p>
+          <div class="bg-gray-50 p-6 rounded-3xl border border-gray-100 inline-block shadow-inner mx-auto">
+            <p class="text-[10px] font-bold text-masjidGreen uppercase tracking-[0.2em] mb-2">No. Akaun Bil Air (Air Selangor)</p>
+            <p class="text-3xl font-mono text-masjidGold font-black" id="cert-water">AS-887766554</p>
           </div>
         </div>
 
-        <!-- Verification Footer -->
-        <div class="grid grid-cols-3 items-end mt-10 relative">
+        <!-- Footer Signatories -->
+        <div class="grid grid-cols-3 items-end z-10">
           <div class="text-center">
-            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-2">Tarikh Disahkan</p>
-            <p class="font-bold text-gray-800 border-b border-gray-100 pb-2" id="cert-date">07 April 2026</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-4">Tarikh Sijil Dijana</p>
+            <p class="font-bold text-gray-800 border-b-2 border-gray-100 pb-2 inline-block px-4" id="cert-date">-- -- ----</p>
           </div>
           
           <div class="text-center flex flex-col items-center">
-            <div class="bg-white p-2 border border-gray-100 rounded-2xl shadow-sm mb-2">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=VERIFIED-MKSLB-2026" alt="QR Code" class="w-20 h-20">
+            <div class="bg-white p-2 border-2 border-gray-100 rounded-2xl shadow-sm mb-3">
+              <img id="cert-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=MKSLB-VERIFY" alt="QR Code" class="w-24 h-24">
             </div>
             <p class="text-[9px] text-gray-400 uppercase tracking-tighter">Imbas Untuk Pengesahan Digital</p>
           </div>
 
           <div class="text-center">
-            <div class="mb-4 h-20 flex items-center justify-center opacity-30">
-              <svg class="w-16 h-16 text-[#006400]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            <!-- Stamp Placeholder -->
+            <div class="mb-4 h-24 flex items-center justify-center opacity-20">
+                <svg class="w-16 h-16 text-masjidGreen" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
             </div>
-            <p class="font-bold text-gray-800 border-t border-gray-100 pt-2 text-[10px] uppercase tracking-widest">Nazir / Pengurus Masjid</p>
+            <p class="font-bold text-gray-800 border-t-2 border-gray-100 pt-2 text-[11px] uppercase tracking-widest">Nazir / Pentadbir Masjid</p>
           </div>
         </div>
 
-        <!-- Footer Motto -->
-        <div class="mt-16 text-center border-t border-gray-50 pt-8">
-          <p class="text-[#006400] font-extrabold uppercase tracking-[0.5em] text-[11px]">Satu Kariah Satu Hati</p>
+        <!-- Motto Section -->
+        <div class="mt-16 text-center">
+            <p class="text-masjidGreen font-black uppercase tracking-[0.6em] text-xs">Satu Kariah Satu Hati</p>
         </div>
+
       </div>
     </div>
 
     <script>
+      // Ambil data dari URL Parameters
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('name')) document.getElementById('cert-name').innerText = urlParams.get('name');
-      if (urlParams.has('ic')) document.getElementById('cert-ic').innerText = urlParams.get('ic');
-      if (urlParams.has('water')) document.getElementById('cert-water-bill').innerText = urlParams.get('water');
+      const name = urlParams.get('name') || "NAMA TIDAK DITEMUI";
+      const ic = urlParams.get('ic') || "000000-00-0000";
+      const water = urlParams.get('water') || "TIADA REKOD";
+
+      // Paparkan data ke dalam sijil
+      document.getElementById('cert-name').innerText = name.toUpperCase();
+      document.getElementById('cert-ic').innerText = ic;
+      document.getElementById('cert-water').innerText = water;
+
+      // Set Tarikh Hari Ini secara automatik
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const today = new Date().toLocaleDateString('ms-MY', options);
+      document.getElementById('cert-date').innerText = today;
+
+      // Kemaskini QR Code secara dinamik berasaskan IC
+      const qrData = `MKSLB-VERIFY-${ic.replace('-', '')}`;
+      document.getElementById('cert-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+
+      // Jika mahu auto-print sebaik sahaja dibuka
+      // window.onload = () => { setTimeout(() => { window.print(); }, 1000); };
     </script>
+    
+    <style>
+        /* Tambahan warna masjid untuk Tailwind */
+        .text-masjidGreen { color: #006400; }
+        .bg-masjidGreen { background-color: #006400; }
+        .hover\:bg-masjidDark:hover { background-color: #004d00; }
+        .text-masjidGold { color: #d4af37; }
+        .bg-masjidGold { background-color: #FFD700; }
+        .border-masjidGold { border-color: #FFD700; }
+    </style>
   </body>
 </html>
