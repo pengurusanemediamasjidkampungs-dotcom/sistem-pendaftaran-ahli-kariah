@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistem Pendaftaran Ahli Kariah | MKSLB</title>
     <link rel="icon" type="image/png" href="logo_masjid.png">
+    
+    <!-- Pautkan fail style.css di sini -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -19,12 +24,8 @@
         }
       }
     </script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-      body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-      .bg-gradient-masjid { background: linear-gradient(135deg, #006400 0%, #004d00 100%); }
-      input:focus, textarea:focus { border-color: #006400 !important; outline: none; ring: 2px ring #006400; }
-    </style>
+    
+    <!-- Nota: Gaya dalam <style> tag telah dipindahkan ke style.css -->
   </head>
   <body class="bg-gray-50 min-h-screen">
     
@@ -154,13 +155,13 @@
         </div>
         <p class="text-[9px] opacity-40 leading-relaxed uppercase">
           Sistem ini mematuhi Akta Perlindungan Data Peribadi 2010 (PDPA).<br>
-          &copy; 2026 Masjid Kampung Sungai Lang Baru. Semua Hak Cipta Terpelihara.
+          &copy; 2026 Masjid Kampung Sungai Lang Baru. Semua Hak Cipta Terpelihana.
         </p>
       </div>
     </footer>
 
     <script>
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbzV8lhqZ_Ij_tK92MVbYaorq8iQ1wvMQIGNZLzLoALiV7Rn75DoBVnzwwktv6UO7_kYug/exec';
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzV8lhqZ_Ij_tK92MVbYaorq8iQ1wvMQIGNZLrLoALiV7Rn75DoBVnzwwktv6UO7_kYug/exec'; /* Sila pastikan URL ini betul */
       const form = document.getElementById('kariahForm');
       const submitBtn = document.getElementById('submitBtn');
       const successMsg = document.getElementById('successMsg');
