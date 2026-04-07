@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daftar Ahli Kariah - MKSLB</title>
+    <title>Daftar Ahli Kariah | MKSLB</title>
+    <link rel="icon" type="image/png" href="logo_masjid.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -35,9 +36,9 @@
       <div class="container mx-auto flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-3">
           <img src="logo_masjid.png" alt="MKSLB" class="h-10 w-auto" onerror="this.src='https://via.placeholder.com/40x40?text=MKSLB'">
-          <span class="font-bold text-sm md:text-base">MKSLB - Pendaftaran</span>
+          <span class="font-extrabold text-sm md:text-base uppercase tracking-tighter">MKSLB - Pendaftaran Ahli</span>
         </a>
-        <a href="https://mkslb.com" class="text-xs font-bold hover:text-masjidGold transition uppercase tracking-widest">Kembali ke mkslb.com</a>
+        <a href="https://mkslb.com" class="text-[10px] font-bold hover:text-masjidGold transition uppercase tracking-[0.2em] hidden md:block border-b-2 border-masjidGold">Kembali ke mkslb.com</a>
       </div>
     </nav>
 
@@ -45,134 +46,126 @@
       <!-- Progress Bar -->
       <div class="mb-8">
         <div class="flex justify-between mb-2">
-          <span class="text-xs font-bold text-masjidGreen uppercase tracking-wider" id="step-indicator">Langkah 1: Maklumat Peribadi</span>
-          <span class="text-xs font-bold text-gray-400" id="step-count">1 / 3</span>
+          <span class="text-[10px] font-extrabold text-masjidGreen uppercase tracking-[0.2em]" id="step-indicator">Langkah 1: Maklumat Peribadi</span>
+          <span class="text-[10px] font-extrabold text-gray-400" id="step-count">1 / 3</span>
         </div>
-        <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+        <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
           <div class="bg-masjidGreen h-full transition-all duration-500" id="progress-bar" style="width: 33.33%"></div>
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-        <form id="multi-step-form" class="p-6 md:p-8">
+      <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+        <form id="multi-step-form" class="p-6 md:p-10">
           
           <!-- Step 1: Maklumat Peribadi -->
           <div id="step-1" class="step-active space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b pb-2">Maklumat Peribadi</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter">Maklumat Peribadi Ketua</h3>
             <div class="space-y-4">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Penuh (Seperti dalam IC)</label>
-                <input type="text" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-masjidGreen outline-none uppercase" placeholder="AHMAD BIN ALI" required>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Penuh (Seperti dalam IC)</label>
+                <input type="text" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none uppercase font-semibold text-gray-700" placeholder="AHMAD BIN ALI" required>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-semibold text-gray-700 mb-1">No. Kad Pengenalan</label>
-                  <input type="text" id="ic_no" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="880101015541" maxlength="12" pattern="\d{12}" required>
-                  <p class="text-[10px] text-gray-400 mt-1">*12 digit tanpa sempang (-)</p>
+                  <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Kad Pengenalan</label>
+                  <input type="text" id="ic_no" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-mono" placeholder="880101015541" maxlength="12" pattern="\d{12}" required>
                 </div>
                 <div>
-                  <label class="block text-sm font-semibold text-gray-700 mb-1">No. Telefon</label>
-                  <input type="tel" id="phone_no" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="0123456789" required>
+                  <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Telefon</label>
+                  <input type="tel" id="phone_no" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-mono" placeholder="0123456789" required>
                 </div>
               </div>
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">No. Pendaftaran Bil Air (MKSLB Kredibiliti)</label>
-                <input type="text" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="Contoh: 123456789" required>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Pendaftaran Bil Air (Air Selangor)</label>
+                <input type="text" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-mono" placeholder="Contoh: 123456789" required>
               </div>
             </div>
             <div class="pt-4">
-              <button type="button" onclick="nextStep(2)" class="w-full bg-masjidGreen text-white font-bold py-4 rounded-xl shadow-lg hover:bg-masjidDark transition">Seterusnya: Maklumat Keluarga</button>
+              <button type="button" onclick="nextStep(2)" class="w-full bg-masjidGreen text-white font-extrabold py-5 rounded-2xl shadow-xl hover:bg-masjidDark transition uppercase tracking-[0.2em] text-xs">Seterusnya</button>
             </div>
           </div>
 
-          <!-- Step 2: Maklumat Keluarga -->
+          <!-- Step 2: Maklumat Keluarga & Kediaman -->
           <div id="step-2" class="step-hidden space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b pb-2">Maklumat Keluarga & Kediaman</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter">Kediaman & Keluarga</h3>
             <div class="space-y-4">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Alamat Kediaman (Zon Kariah)</label>
-                <textarea rows="3" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="No. 12, Jalan Utama, Kampung Sungai Lang Baru..."></textarea>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Alamat Kediaman (MKSLB)</label>
+                <textarea rows="3" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none font-semibold text-gray-700 uppercase" placeholder="No. 12, Jalan Utama..."></textarea>
               </div>
-              
-              <div class="p-4 bg-green-50 rounded-xl border border-green-100">
-                <p class="text-sm font-bold text-masjidGreen mb-2 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                  </svg>
+              <div class="p-5 bg-green-50 rounded-2xl border border-green-100">
+                <p class="text-[10px] font-extrabold text-masjidGreen mb-3 uppercase tracking-widest flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
                   Lokasi Rumah (GPS)
                 </p>
-                <button type="button" class="bg-white border border-masjidGreen text-masjidGreen text-xs font-bold py-2 px-4 rounded-lg hover:bg-masjidGreen hover:text-white transition">Pin Lokasi Saya (Google Maps)</button>
-                <p class="text-[10px] text-gray-500 mt-2">Ini membantu pihak masjid melakukan ziarah kebajikan.</p>
+                <button type="button" class="w-full bg-white border-2 border-masjidGreen text-masjidGreen text-[10px] font-extrabold py-3 px-4 rounded-xl hover:bg-masjidGreen hover:text-white transition uppercase tracking-widest">Pin Lokasi GPS</button>
               </div>
-
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Jumlah Tanggungan (Anak/Isteri)</label>
-                <input type="number" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="0">
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Jumlah Tanggungan</label>
+                <input type="number" class="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-masjidGreen outline-none" placeholder="0">
               </div>
             </div>
             <div class="pt-4 flex gap-3">
-              <button type="button" onclick="nextStep(1)" class="flex-1 bg-gray-100 text-gray-600 font-bold py-4 rounded-xl">Kembali</button>
-              <button type="button" onclick="nextStep(3)" class="flex-2 bg-masjidGreen text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-masjidDark transition">Seterusnya: Dokumen</button>
+              <button type="button" onclick="nextStep(1)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
+              <button type="button" onclick="nextStep(3)" class="flex-2 bg-masjidGreen text-white font-extrabold py-4 px-10 rounded-2xl shadow-xl hover:bg-masjidDark transition uppercase text-[10px] tracking-widest">Seterusnya</button>
             </div>
           </div>
 
-          <!-- Step 3: Dokumen & Pengesahan -->
+          <!-- Step 3: Dokumen & PDPA -->
           <div id="step-3" class="step-hidden space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b pb-2">Muat Naik & Pengesahan</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter">Pengesahan Akhir</h3>
             <div class="space-y-4">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Gambar Kad Pengenalan (Depan)</label>
-                <input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-masjidGreen hover:file:bg-green-100">
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Muat Naik Gambar IC (Depan)</label>
+                <input type="file" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-6 file:rounded-full file:border-0 file:text-[10px] file:font-bold file:bg-green-50 file:text-masjidGreen hover:file:bg-green-100">
               </div>
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Bukti Alamat (Bil Air/Elektrik)</label>
-                <input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-masjidGreen hover:file:bg-green-100">
-              </div>
-
-              <div class="pt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <label class="flex items-start gap-3 cursor-pointer">
-                  <input type="checkbox" class="mt-1 w-5 h-5 text-masjidGreen rounded focus:ring-masjidGreen" required>
-                  <span class="text-xs text-gray-600 leading-relaxed">
-                    Saya dengan ini bersetuju memberikan maklumat ini untuk kegunaan pihak <strong>Masjid Kampung Sungai Lang Baru (MKSLB)</strong> sahaja bagi tujuan pengurusan kariah mengikut <strong>Akta Perlindungan Data Peribadi (PDPA)</strong>.
+              <div class="pt-4 p-5 bg-gray-50 rounded-2xl border border-gray-200">
+                <label class="flex items-start gap-4 cursor-pointer">
+                  <input type="checkbox" class="mt-1 w-6 h-6 text-masjidGreen rounded-lg focus:ring-masjidGreen border-gray-300" required>
+                  <span class="text-[10px] text-gray-500 leading-relaxed font-medium uppercase tracking-tighter">
+                    SAYA DENGAN INI BERSETUJU MEMBERIKAN MAKLUMAT INI UNTUK KEGUNAAN PIHAK <strong>MASJID KAMPUNG SUNGAI LANG BARU (MKSLB)</strong> SAHAJA BAGI TUJUAN PENGURUSAN KARIAH MENGIKUT <strong>AKTA PERLINDUNGA DATA PERIBADI 2010 (PDPA)</strong>.
                   </span>
                 </label>
               </div>
             </div>
-            <div class="pt-4 flex gap-3">
-              <button type="button" onclick="nextStep(2)" class="flex-1 bg-gray-100 text-gray-600 font-bold py-4 rounded-xl">Kembali</button>
-              <button type="submit" class="flex-2 bg-masjidGold text-masjidGreen font-extrabold py-4 px-8 rounded-xl shadow-lg hover:scale-105 transition">Hantar & Sahkan</button>
+            <div class="pt-6 flex gap-3">
+              <button type="button" onclick="nextStep(2)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
+              <button type="submit" class="flex-2 bg-masjidGold text-masjidGreen font-extrabold py-4 px-10 rounded-2xl shadow-2xl hover:scale-105 transition uppercase text-[10px] tracking-widest">Hantar Pendaftaran</button>
             </div>
           </div>
         </form>
       </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="mt-20 bg-gray-900 text-gray-500 py-12 px-4 border-t-4 border-masjidGold">
+      <div class="container mx-auto text-center">
+        <p class="text-white font-bold mb-1 uppercase tracking-[0.2em] text-xs">Masjid Kampung Sungai Lang Baru (MKSLB)</p>
+        <p class="text-[10px] mb-2 uppercase">Kampung Sungai Lang Baru, 42700 Banting, Selangor</p>
+        <p class="text-[10px] mb-8 font-bold text-masjidGold">HUBUNGI: 03-3181 1994</p>
+        <p class="text-[9px] opacity-30 leading-relaxed uppercase max-w-md mx-auto">
+          Sistem Pendaftaran Ahli Kariah Digital MKSLB mematuhi piawaian perlindungan data peribadi kebangsaan.
+        </p>
+      </div>
+    </footer>
+
     <script>
       function nextStep(step) {
-        // Validation for Step 1
         if (step === 2) {
           const ic = document.getElementById('ic_no').value;
-          if (ic.length !== 12) {
-            alert('Sila masukkan 12 digit No. Kad Pengenalan yang sah.');
-            return;
-          }
+          if (ic.length !== 12) { alert('Sila masukkan 12 digit No. KP tanpa sempang.'); return; }
         }
-
-        // UI Updates
         document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.replace('step-active', 'step-hidden'));
         document.getElementById('step-' + step).classList.replace('step-hidden', 'step-active');
-        
-        const indicators = ["Maklumat Peribadi", "Maklumat Keluarga", "Muat Naik & PDPA"];
+        const indicators = ["Maklumat Peribadi", "Kediaman & Keluarga", "Dokumen & PDPA"];
         document.getElementById('step-indicator').innerText = "Langkah " + step + ": " + indicators[step-1];
         document.getElementById('step-count').innerText = step + " / 3";
         document.getElementById('progress-bar').style.width = (step / 3 * 100) + "%";
-        
         window.scrollTo(0, 0);
       }
-
       document.getElementById('multi-step-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Terima kasih! Pendaftaran anda telah diterima. Nazir akan menyemak maklumat anda dalam tempoh 48 jam.');
+        alert('Terima kasih! Maklumat anda telah dihantar ke sistem MKSLB untuk pengesahan Nazir.');
         window.location.href = 'index.html';
       });
     </script>
