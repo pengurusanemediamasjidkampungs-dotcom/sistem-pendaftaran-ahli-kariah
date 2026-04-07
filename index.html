@@ -21,11 +21,13 @@
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-      body { font-family: 'Poppins', sans-serif; }
+      body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
       .bg-gradient-masjid { background: linear-gradient(135deg, #006400 0%, #004d00 100%); }
+      input:focus, textarea:focus { border-color: #006400 !important; outline: none; ring: 2px ring #006400; }
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
+    
     <!-- Navbar -->
     <nav class="bg-white text-masjidGreen p-4 shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div class="container mx-auto flex justify-between items-center">
@@ -38,53 +40,115 @@
         </div>
         <div class="hidden md:flex space-x-6 text-xs font-bold uppercase tracking-widest">
           <a href="https://mkslb.com" class="hover:text-masjidGold transition">Web Rasmi</a>
-          <a href="daftar.html" class="text-masjidGold bg-masjidGreen px-6 py-2 rounded-full hover:bg-masjidDark transition">Daftar</a>
-          <a href="admin.html" class="hover:text-masjidGold transition py-2">Admin</a>
+          <a href="#borang" class="text-masjidGold bg-masjidGreen px-6 py-2 rounded-full hover:bg-masjidDark transition">Daftar</a>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <main>
-      <div class="bg-gradient-masjid text-white py-16 px-4">
-        <div class="container mx-auto text-center">
-          <img src="logo_masjid.png" alt="Logo MKSLB" class="h-32 mx-auto mb-8 drop-shadow-2xl" onerror="this.src='https://via.placeholder.com/120x120?text=MKSLB'">
-          <h2 class="text-3xl md:text-5xl font-extrabold mb-4 uppercase tracking-tight">Sistem Pendaftaran Ahli Kariah</h2>
-          <p class="text-base md:text-lg mb-10 max-w-2xl mx-auto opacity-80 font-light italic">"Memperkasakan Pengurusan Kariah Secara Digital & Sistematik"</p>
-          <div class="flex flex-col md:flex-row justify-center gap-4">
-            <a href="daftar.html" class="bg-masjidGold text-masjidGreen font-extrabold py-4 px-10 rounded-full transition duration-300 shadow-xl hover:scale-105 transform uppercase tracking-widest text-sm">Mula Mendaftar Sekarang</a>
-            <a href="https://mkslb.com" class="bg-transparent border-2 border-white text-white font-bold py-4 px-10 rounded-full hover:bg-white hover:text-masjidGreen transition duration-300 uppercase tracking-widest text-sm">Kembali ke mkslb.com</a>
-          </div>
-        </div>
+    <header class="bg-gradient-masjid text-white py-12 px-4">
+      <div class="container mx-auto text-center">
+        <img src="logo_masjid.png" alt="Logo MKSLB" class="h-24 mx-auto mb-6 drop-shadow-2xl" onerror="this.src='https://via.placeholder.com/100x100?text=MKSLB'">
+        <h2 class="text-2xl md:text-4xl font-extrabold mb-2 uppercase tracking-tight">Pendaftaran Ahli Kariah</h2>
+        <p class="text-sm md:text-base opacity-80 font-light italic">Sila isi maklumat di bawah dengan lengkap dan sahih.</p>
       </div>
+    </header>
 
-      <!-- Features Grid -->
-      <div class="container mx-auto mt-[-40px] px-4">
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-masjidGold">
-            <h3 class="text-lg font-bold text-masjidGreen mb-3 uppercase tracking-tighter">Khairat Kematian</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Pendaftaran memudahkan pengurusan kebajikan dan bantuan segera kepada waris kariah.</p>
+    <!-- Main Content: Borang Pendaftaran -->
+    <main class="container mx-auto mt-[-30px] px-4 mb-20">
+      <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100" id="borang">
+        
+        <div class="p-8 md:p-12">
+          <form id="kariahForm" class="space-y-6">
+            
+            <!-- Maklumat Peribadi Section -->
+            <div class="border-b border-gray-100 pb-4 mb-6">
+                <h3 class="text-lg font-bold text-masjidGreen uppercase tracking-wider">A. Maklumat Peribadi</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Nama Penuh (Seperti Dalam IC)</label>
+                <input type="text" name="nama" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white transition" placeholder="CONTOH: AHMAD BIN ALI">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">No. Kad Pengenalan</label>
+                <input type="number" name="ic" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white transition" placeholder="CONTOH: 850101105555">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">No. Telefon (WhatsApp)</label>
+                <input type="tel" name="telefon" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white transition" placeholder="CONTOH: 0123456789">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">No. Akaun Bil Air (Air Selangor)</label>
+                <input type="text" name="bil_air" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white transition" placeholder="CONTOH: 1700123456">
+              </div>
+            </div>
+
+            <!-- Maklumat Kediaman Section -->
+            <div class="border-b border-gray-100 pb-4 mt-10 mb-6">
+                <h3 class="text-lg font-bold text-masjidGreen uppercase tracking-wider">B. Maklumat Kediaman & Lokasi</h3>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Alamat Penuh Rumah</label>
+                <textarea name="alamat" required rows="3" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white transition" placeholder="Alamat lengkap mengikut geran atau bil utiliti..."></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-xs font-bold text-gray-500 uppercase mb-2">No. Lot (JUPEM)</label>
+                  <input type="text" name="no_lot" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white transition" placeholder="CONTOH: LOT 1234">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Koordinat GPS</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="coords" readonly class="w-full p-3 bg-gray-200 border border-gray-200 rounded-xl text-sm font-mono" placeholder="Lat, Lng">
+                    <button type="button" onclick="getLocation()" class="bg-masjidGreen text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-masjidDark transition">PIN</button>
+                  </div>
+                  <input type="hidden" name="lat" id="lat">
+                  <input type="hidden" name="lng" id="lng">
+                  <p class="text-[10px] text-gray-400 mt-1 italic">*Sila klik 'PIN' semasa berada di rumah anda.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="pt-10">
+                <p class="text-[11px] text-gray-500 mb-6 text-center italic">
+                    "Saya dengan ini mengesahkan maklumat di atas adalah benar dan bersetuju untuk memberikan maklumat ini bagi kegunaan pihak Masjid Kampung Sungai Lang Baru (MKSLB) sahaja selaras dengan Akta PDPA 2010."
+                </p>
+                <button type="submit" id="submitBtn" class="w-full bg-masjidGreen text-white font-extrabold py-5 rounded-2xl shadow-xl hover:bg-masjidDark transition duration-300 transform hover:scale-[1.02] uppercase tracking-widest">
+                    Hantar Pendaftaran Keahlian
+                </button>
+            </div>
+
+          </form>
+
+          <!-- Success Message (Hidden by default) -->
+          <div id="successMsg" class="hidden text-center py-12">
+              <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-masjidGreen mb-2">Pendaftaran Berjaya!</h3>
+              <p class="text-gray-500 mb-8">Maklumat anda telah selamat disimpan dalam pangkalan data kariah MKSLB.</p>
+              <button onclick="window.location.reload()" class="text-masjidGreen font-bold underline">Daftar Ahli Lain</button>
           </div>
-          <div class="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-masjidGold">
-            <h3 class="text-lg font-bold text-masjidGreen mb-3 uppercase tracking-tighter">Bantuan & Ziarah</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Memudahkan biro kebajikan mengenalpasti ahli yang memerlukan bantuan dan melakukan ziarah.</p>
-          </div>
-          <div class="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-masjidGold">
-            <h3 class="text-lg font-bold text-masjidGreen mb-3 uppercase tracking-tighter">Sijil Digital</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Ahli yang berdaftar akan menerima Sijil Keahlian Digital rasmi dengan Kod QR pengesahan.</p>
-          </div>
+
         </div>
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="mt-20 bg-gray-900 text-gray-400 py-12 px-4 border-t-4 border-masjidGold">
+    <footer class="bg-gray-900 text-gray-400 py-12 px-4 border-t-4 border-masjidGold">
       <div class="container mx-auto text-center">
-        <img src="logo_masjid.png" alt="Logo MKSLB" class="h-16 mx-auto mb-6 grayscale opacity-30" onerror="this.src='https://via.placeholder.com/80x80?text=MKSLB'">
+        <img src="logo_masjid.png" alt="Logo MKSLB" class="h-16 mx-auto mb-6 grayscale opacity-30">
         <p class="text-white font-bold mb-2 uppercase tracking-[0.2em]">Masjid Kampung Sungai Lang Baru (MKSLB)</p>
-        <p class="text-xs mb-1">Kampung Sungai Lang Baru, 42700 Banting, Selangor Darul Ehsan</p>
-        <p class="text-xs mb-6 font-bold text-masjidGold underline">Hubungi: 03-3181 1994</p>
-        <div class="flex justify-center gap-6 mb-8 text-[10px] font-bold uppercase tracking-widest">
+        <p class="text-xs mb-1 text-gray-500 uppercase">Kampung Sungai Lang Baru, 42700 Banting, Selangor</p>
+        <div class="flex justify-center gap-6 mt-8 mb-8 text-[10px] font-bold uppercase tracking-widest">
           <a href="https://facebook.com/MKSLB" class="hover:text-white transition">Facebook</a>
           <a href="https://mkslb.com" class="hover:text-white transition">mkslb.com</a>
         </div>
@@ -94,5 +158,71 @@
         </p>
       </div>
     </footer>
+
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzV8lhqZ_Ij_tK92MVbYaorq8iQ1wvMQIGNZLzLoALiV7Rn75DoBVnzwwktv6UO7_kYug/exec';
+      const form = document.getElementById('kariahForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMsg = document.getElementById('successMsg');
+
+      // Fungsi Ambil Lokasi
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          alert("Geolokasi tidak disokong oleh pelayar anda.");
+        }
+      }
+
+      function showPosition(position) {
+        document.getElementById('lat').value = position.coords.latitude;
+        document.getElementById('lng').value = position.coords.longitude;
+        document.getElementById('coords').value = position.coords.latitude.toFixed(6) + ", " + position.coords.longitude.toFixed(6);
+        alert("Lokasi berjaya dikesan!");
+      }
+
+      function showError(error) {
+        alert("Gagal mengesan lokasi. Sila pastikan GPS telefon anda dihidupkan.");
+      }
+
+      // Handle Form Submit
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Sedang Menghantar... Sila Tunggu";
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+        const formData = {
+          nama: form.nama.value,
+          ic: form.ic.value,
+          telefon: form.telefon.value,
+          bil_air: form.bil_air.value,
+          alamat: form.alamat.value,
+          no_lot: form.no_lot.value,
+          lat: form.lat.value,
+          lng: form.lng.value
+        };
+
+        fetch(scriptURL, { 
+            method: 'POST', 
+            mode: 'no-cors', // Penting untuk bypass CORS Apps Script
+            cache: 'no-cache',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData) 
+        })
+        .then(() => {
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+          window.scrollTo(0, 0);
+        })
+        .catch(error => {
+          console.error('Error!', error.message);
+          alert("Maaf, ralat berlaku. Sila cuba lagi.");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "Hantar Pendaftaran Keahlian";
+        });
+      });
+    </script>
   </body>
 </html>
