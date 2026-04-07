@@ -6,6 +6,7 @@
     <title>Daftar Ahli Kariah | MKSLB</title>
     <link rel="icon" type="image/png" href="logo_masjid.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
       tailwind.config = {
         theme: {
@@ -28,7 +29,53 @@
         from { opacity: 0; transform: translateX(20px); }
         to { opacity: 1; transform: translateX(0); }
       }
-      input:focus, textarea:focus { border-color: #006400 !important; ring: 1px ring #006400; }
+      input:focus, textarea:focus, select:focus { border-color: #006400 !important; ring: 1px ring #006400; }
+      .form-group label {
+          display: block;
+          font-size: 10px;
+          font-weight: bold;
+          color: #a0aec0; /* Tailwind gray-400 */
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          margin-bottom: 0.25rem; /* Tailwind mb-1 */
+      }
+      .form-group input, .form-group select, .form-group textarea {
+          width: 100%;
+          padding: 1rem; /* Tailwind p-4 */
+          border: 1px solid #e2e8f0; /* Tailwind border-gray-200 */
+          border-radius: 1rem; /* Tailwind rounded-2xl */
+          outline: none;
+          background-color: #f9fafb; /* Tailwind bg-gray-50 */
+          font-family: 'Poppins', sans-serif;
+          font-size: 1rem;
+          color: #4a5568; /* Tailwind text-gray-700 */
+      }
+      .form-group select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+      }
+      .btn-mylot {
+          background-color: #006400; /* masjidGreen */
+          color: white;
+          font-weight: bold;
+          padding: 0.75rem 1.25rem; /* px-5 py-3 */
+          border-radius: 1rem; /* rounded-2xl */
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.75rem; /* text-xs */
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          transition: background-color 0.2s;
+      }
+      .btn-mylot:hover {
+          background-color: #004d00; /* masjidDark */
+      }
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
@@ -69,23 +116,23 @@
           <div id="step-1" class="step-active space-y-6">
             <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter text-center md:text-left">Maklumat Peribadi</h3>
             <div class="space-y-4">
-              <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Penuh (Seperti dalam IC)</label>
-                <input type="text" id="nama" name="nama" class="w-full p-4 border border-gray-200 rounded-2xl outline-none uppercase font-semibold text-gray-700 bg-gray-50" placeholder="CONTOH: AHMAD BIN ALI" required>
+              <div class="form-group">
+                <label for="nama">Nama Penuh (Seperti dalam IC)</label>
+                <input type="text" id="nama" name="nama" class="uppercase font-semibold" placeholder="CONTOH: AHMAD BIN ALI" required>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Kad Pengenalan</label>
-                  <input type="number" id="ic" name="ic" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-mono bg-gray-50" placeholder="880101105541" required>
+                <div class="form-group">
+                  <label for="ic">No. Kad Pengenalan</label>
+                  <input type="number" id="ic" name="ic" class="font-mono" placeholder="880101105541" required>
                 </div>
-                <div>
-                  <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Telefon (WhatsApp)</label>
-                  <input type="tel" id="telefon" name="telefon" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-mono bg-gray-50" placeholder="0123456789" required>
+                <div class="form-group">
+                  <label for="telefon">No. Telefon (WhatsApp)</label>
+                  <input type="tel" id="telefon" name="telefon" class="font-mono" placeholder="0123456789" required>
                 </div>
               </div>
-              <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Akaun Bil Air (Air Selangor)</label>
-                <input type="text" id="bil_air" name="bil_air" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-mono bg-gray-50" placeholder="Contoh: 1700123456" required>
+              <div class="form-group">
+                <label for="bil_air">No. Akaun Bil Air (Air Selangor)</label>
+                <input type="text" id="bil_air" name="bil_air" class="font-mono" placeholder="Contoh: 1700123456" required>
               </div>
             </div>
             <div class="pt-4">
@@ -95,28 +142,55 @@
 
           <!-- Step 2: Kediaman & Lokasi -->
           <div id="step-2" class="step-hidden space-y-6">
-            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter text-center md:text-left">Kediaman & Lokasi</h3>
+            <h3 class="text-xl font-bold text-masjidGreen border-b-2 border-masjidGold/20 pb-2 uppercase tracking-tighter text-center md:text-left">Maklumat Kediaman</h3>
             <div class="space-y-4">
-              <div>
-                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Alamat Penuh Rumah</label>
-                <textarea id="alamat" name="alamat" rows="3" class="w-full p-4 border border-gray-200 rounded-2xl outline-none font-semibold text-gray-700 uppercase bg-gray-50" placeholder="No. 12, Jalan Utama, Kg Sg Lang Baru..." required></textarea>
+              
+              <div class="form-group">
+                  <label for="jalan_lorong">Lorong / Jalan Utama</label>
+                  <select id="jalan_lorong" name="jalan_lorong" required>
+                      <option value="">-- Pilih Lorong / Jalan --</option>
+                      <option value="Lorong 1">Lorong 1</option>
+                      <option value="Lorong 2">Lorong 2</option>
+                      <option value="Lorong 3">Lorong 3</option>
+                      <option value="Lorong 4">Lorong 4</option>
+                      <option value="Jalan Hj. Hamid">Jalan Hj. Hamid</option>
+                      <option value="Jalan Utama">Jalan Utama (Besar)</option>
+                  </select>
               </div>
-              <div class="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">No. Lot (JUPEM)</label>
-                    <input type="text" id="no_lot" name="no_lot" class="w-full p-4 border border-gray-200 rounded-2xl outline-none uppercase bg-gray-50 font-mono text-sm" placeholder="LOT 1234" required>
-                  </div>
-                  <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Koordinat GPS</label>
-                    <div class="flex gap-2">
-                        <input type="text" id="coordsDisplay" readonly class="w-full p-4 border border-gray-200 rounded-2xl outline-none bg-gray-100 font-mono text-[10px]" placeholder="Lat, Lng">
-                        <button type="button" onclick="getLocation()" class="bg-masjidGreen text-white px-4 rounded-2xl text-[10px] font-bold hover:bg-masjidDark transition uppercase">PIN</button>
-                    </div>
-                    <!-- Hidden inputs for Lat/Lng -->
-                    <input type="hidden" id="lat" name="lat">
-                    <input type="hidden" id="lng" name="lng">
-                  </div>
+
+              <div class="form-group">
+                  <label for="nama_taman">Nama Taman (Jika ada)</label>
+                  <input type="text" id="nama_taman" name="nama_taman" placeholder="Contoh: Taman Beringin">
               </div>
+
+              <div class="form-group">
+                  <label for="no_lot">Nombor LOT (JUPEM)</label>
+                  <div style="display: flex; gap: 10px; align-items: center;">
+                      <input type="text" id="no_lot" name="no_lot" placeholder="Contoh: LOT 2979" style="flex: 1;" required>
+                      <a href="https://peta.jupem.gov.my/" target="_blank" class="btn-mylot" title="Semak di MyLot JUPEM">
+                          <i class="fa fa-external-link"></i> Semak MyLot
+                      </a>
+                  </div>
+                  <small style="color: #666; display: block; margin-top: 0.5rem;">Sila pastikan nombor lot tepat mengikut geran atau MyLot.</small>
+              </div>
+
+              <div class="form-group">
+                  <label for="no_rumah">Nombor Unit / No. Pintu Rumah</label>
+                  <input type="text" id="no_rumah" name="no_rumah" placeholder="Contoh: No. 17 / No. 17-A" required>
+                  <small style="color: #666; display: block; margin-top: 0.5rem;">Penting jika terdapat lebih satu rumah dalam satu lot tanah.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="coordsDisplay">Koordinat GPS</label>
+                <div class="flex gap-2">
+                    <input type="text" id="coordsDisplay" readonly class="p-4 border border-gray-200 rounded-2xl outline-none bg-gray-100 font-mono text-[10px]" placeholder="Lat, Lng" style="flex: 1;">
+                    <button type="button" onclick="getLocation()" class="bg-masjidGreen text-white px-4 rounded-2xl text-[10px] font-bold hover:bg-masjidDark transition uppercase">PIN</button>
+                </div>
+                <!-- Hidden inputs for Lat/Lng -->
+                <input type="hidden" id="lat" name="lat">
+                <input type="hidden" id="lng" name="lng">
+              </div>
+
             </div>
             <div class="pt-4 flex gap-3">
               <button type="button" onclick="goToStep(1)" class="flex-1 bg-gray-100 text-gray-400 font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest">Kembali</button>
@@ -184,7 +258,7 @@
         document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.replace('step-active', 'step-hidden'));
         document.getElementById('step-' + step).classList.replace('step-hidden', 'step-active');
         
-        const indicators = ["Maklumat Peribadi", "Kediaman & Lokasi", "Pengesahan Akhir"];
+        const indicators = ["Maklumat Peribadi", "Maklumat Kediaman", "Pengesahan Akhir"];
         document.getElementById('step-indicator').innerText = "Langkah " + step + ": " + indicators[step-1];
         document.getElementById('step-count').innerText = step + " / 3";
         document.getElementById('progress-bar').style.width = (step / 3 * 100) + "%";
@@ -195,24 +269,29 @@
 
       // Validasi Langkah 1
       function validateStep1() {
-          const ic = document.getElementById('ic').value;
           const nama = document.getElementById('nama').value;
-          const tel = document.getElementById('telefon').value;
-          if(nama && ic.length >= 12 && tel) {
+          const ic = document.getElementById('ic').value;
+          const telefon = document.getElementById('telefon').value;
+          const bil_air = document.getElementById('bil_air').value;
+          if(nama && ic.length >= 12 && telefon && bil_air) {
               goToStep(2);
           } else {
-              alert("Sila lengkapkan Nama, 12-Digit IC dan No Telefon.");
+              alert("Sila lengkapkan semua maklumat peribadi: Nama, 12-Digit IC, No Telefon dan No. Akaun Bil Air.");
           }
       }
 
       // Validasi Langkah 2
       function validateStep2() {
-          const alamat = document.getElementById('alamat').value;
-          const lot = document.getElementById('no_lot').value;
-          if(alamat && lot) {
+          const jalan_lorong = document.getElementById('jalan_lorong').value;
+          const no_lot = document.getElementById('no_lot').value;
+          const no_rumah = document.getElementById('no_rumah').value;
+          const lat = document.getElementById('lat').value;
+          const lng = document.getElementById('lng').value;
+          
+          if(jalan_lorong && no_lot && no_rumah && lat && lng) {
               goToStep(3);
           } else {
-              alert("Sila masukkan Alamat dan No Lot.");
+              alert("Sila lengkapkan semua maklumat kediaman: Lorong/Jalan Utama, No. LOT, No. Pintu Rumah, dan PIN Koordinat GPS.");
           }
       }
 
@@ -226,18 +305,44 @@
                 document.getElementById('coordsDisplay').value = pos.coords.latitude.toFixed(6) + ", " + pos.coords.longitude.toFixed(6);
                 alert("Lokasi berjaya dikesan!");
               }, 
-              () => alert("Sila hidupkan GPS anda.")
+              (error) => {
+                let errorMessage = "Sila hidupkan GPS anda dan berikan kebenaran lokasi.";
+                if (error.code === error.PERMISSION_DENIED) {
+                  errorMessage = "Akses lokasi ditolak. Sila benarkan akses lokasi di tetapan pelayar anda.";
+                } else if (error.code === error.POSITION_UNAVAILABLE) {
+                  errorMessage = "Maklumat lokasi tidak tersedia.";
+                } else if (error.code === error.TIMEOUT) {
+                  errorMessage = "Masa menunggu untuk mendapatkan lokasi telah tamat.";
+                }
+                alert(errorMessage);
+              }
           );
+        } else {
+            alert("Pelayar anda tidak menyokong Geolocation.");
         }
       }
 
       // Ringkasan Data
       function generateSummary() {
+          // Gabungkan alamat penuh dari input yang berasingan
+          let fullAddress = "";
+          const no_rumah_val = document.getElementById('no_rumah').value;
+          const jalan_lorong_val = document.getElementById('jalan_lorong').value;
+          const nama_taman_val = document.getElementById('nama_taman').value;
+          const no_lot_val = document.getElementById('no_lot').value;
+
+          if (no_rumah_val) fullAddress += `No. ${no_rumah_val}, `;
+          if (jalan_lorong_val) fullAddress += `${jalan_lorong_val}, `;
+          if (nama_taman_val) fullAddress += `${nama_taman_val}, `;
+          fullAddress += `Lot ${no_lot_val}`; // No Lot is required
+
           const html = `
             <p><strong>NAMA:</strong> ${document.getElementById('nama').value.toUpperCase()}</p>
             <p><strong>IC:</strong> ${document.getElementById('ic').value}</p>
             <p><strong>TEL:</strong> ${document.getElementById('telefon').value}</p>
-            <p><strong>LOT:</strong> ${document.getElementById('no_lot').value.toUpperCase()}</p>
+            <p><strong>BIL AIR:</strong> ${document.getElementById('bil_air').value}</p>
+            <p><strong>ALAMAT:</strong> ${fullAddress.toUpperCase()}</p>
+            <p><strong>KOORDINAT:</strong> ${document.getElementById('lat').value}, ${document.getElementById('lng').value}</p>
           `;
           document.getElementById('summary').innerHTML = html;
       }
@@ -245,27 +350,51 @@
       // Submit Form
       form.addEventListener('submit', e => {
         e.preventDefault();
-        if(!document.getElementById('pdpa').checked) return;
+        if(!document.getElementById('pdpa').checked) {
+            alert("Sila setuju dengan terma PDPA.");
+            return;
+        }
 
         loadingOverlay.classList.remove('hidden');
+
+        // Gabungkan alamat penuh dari input yang berasingan
+        let fullAddress = "";
+        const no_rumah_val = document.getElementById('no_rumah').value;
+        const jalan_lorong_val = document.getElementById('jalan_lorong').value;
+        const nama_taman_val = document.getElementById('nama_taman').value;
+        const no_lot_val = document.getElementById('no_lot').value;
+
+        if (no_rumah_val) fullAddress += `No. ${no_rumah_val}, `;
+        if (jalan_lorong_val) fullAddress += `${jalan_lorong_val}, `;
+        if (nama_taman_val) fullAddress += `${nama_taman_val}, `;
+        fullAddress += `Lot ${no_lot_val}`; // No Lot is required
 
         const payload = {
           nama: document.getElementById('nama').value,
           ic: document.getElementById('ic').value,
           telefon: document.getElementById('telefon').value,
           bil_air: document.getElementById('bil_air').value,
-          alamat: document.getElementById('alamat').value,
+          jalan_lorong: document.getElementById('jalan_lorong').value,
+          nama_taman: document.getElementById('nama_taman').value,
           no_lot: document.getElementById('no_lot').value,
+          no_rumah: document.getElementById('no_rumah').value,
+          alamat_lengkap: fullAddress, // Tambahkan field alamat lengkap
           lat: document.getElementById('lat').value,
           lng: document.getElementById('lng').value
         };
 
         fetch(scriptURL, { 
             method: 'POST', 
-            mode: 'no-cors', 
+            // mode: 'no-cors', // Penting: Jika ini adalah Google Apps Script, biarkan "no-cors"
+            headers: {
+                'Content-Type': 'application/json', // Tambahkan header ini
+            },
             body: JSON.stringify(payload) 
         })
-        .then(() => {
+        .then(response => {
+            // Untuk no-cors, response.ok sentiasa true, jadi perlu bergantung pada Apps Script untuk maklum balas berjaya/gagal
+            // Untuk Apps Script, selalunya tidak ada respons yang boleh diakses dari client side dengan "no-cors"
+            // Oleh itu, kita akan anggap berjaya jika tiada ralat network
             loadingOverlay.classList.add('hidden');
             form.classList.add('hidden');
             document.getElementById('progress-bar').parentElement.parentElement.classList.add('hidden');
@@ -274,7 +403,7 @@
         })
         .catch(err => {
             loadingOverlay.classList.add('hidden');
-            alert("Ralat berlaku. Sila cuba lagi.");
+            alert("Ralat berlaku semasa menghantar maklumat. Sila cuba lagi.");
             console.error(err);
         });
       });
