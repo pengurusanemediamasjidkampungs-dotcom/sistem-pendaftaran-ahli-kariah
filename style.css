@@ -1,0 +1,84 @@
+/* Gaya CSS Global (jika ada, tambahkan di sini) */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+/* Gaya untuk form group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Gaya untuk label */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555; /* Warna teks label yang sedikit lebih gelap */
+}
+
+/* Gaya untuk input dan select */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar */
+    font-size: 16px; /* Saiz fon yang lebih baik untuk input */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #007bff; /* Garisan fokus berwarna biru */
+    outline: none; /* Buang outline default browser */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Efek bayangan saat fokus */
+}
+
+/* Gaya untuk butang "Semak MyLot" */
+.btn-mylot {
+    background-color: #007bff; /* Warna biru JUPEM */
+    color: white;
+    padding: 12px 20px; /* Padding yang sedikit lebih besar */
+    border: none; /* Buang border default butang */
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px; /* Saiz fon yang sedikit lebih besar */
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Pastikan teks di tengah butang */
+    cursor: pointer; /* Menunjukkan ia boleh diklik */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transisi untuk hover dan klik */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambah bayangan untuk menonjol */
+    -webkit-appearance: none; /* Untuk konsistensi rentas pelayar */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.btn-mylot:hover {
+    background-color: #0056b3; /* Warna biru yang lebih gelap saat hover */
+    color: #fff;
+    transform: translateY(-2px); /* Efek sedikit naik saat hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Bayangan yang lebih besar saat hover */
+}
+
+.btn-mylot:active {
+    background-color: #004085; /* Warna biru yang lebih gelap saat diklik */
+    transform: translateY(0); /* Kembali ke posisi semula saat diklik */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih kecil saat diklik */
+}
+
+/* Jika ada ikon di dalam butang, gaya untuk ikon */
+.btn-mylot .icon {
+    margin-right: 8px; /* Ruang antara ikon dan teks */
+}
