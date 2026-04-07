@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel Pengurusan Nazir - MKSLB</title>
+    <link rel="icon" type="image/png" href="logo_masjid.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -26,228 +27,237 @@
         color: #FFD700;
         font-weight: 700;
       }
+      /* Custom scrollbar for table */
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
     </style>
   </head>
   <body class="bg-gray-100 min-h-screen">
-    <!-- Top Bar -->
-    <div class="bg-masjidGold h-1 w-full"></div>
-
+    
     <!-- Navbar -->
     <nav class="bg-masjidGreen text-white p-4 shadow-md sticky top-0 z-50">
       <div class="container mx-auto flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-3">
           <img src="logo_masjid.png" alt="MKSLB" class="h-10 w-auto brightness-0 invert" onerror="this.src='https://via.placeholder.com/40x40?text=MKSLB'">
           <div class="leading-tight">
-            <span class="block text-[10px] uppercase tracking-widest opacity-80">Sistem Pengurusan Ahli Kariah</span>
-            <span class="block font-bold">Masjid Kampung Sungai Lang Baru</span>
+            <span class="block text-[10px] uppercase tracking-widest opacity-80">Panel Pentadbiran</span>
+            <span class="block font-bold text-sm">Masjid Kampung Sungai Lang Baru</span>
           </div>
         </a>
-        <div class="hidden md:flex items-center space-x-6 text-sm">
-          <a href="index.html" class="hover:text-masjidGold transition">Halaman Utama</a>
-          <a href="daftar.html" class="hover:text-masjidGold transition">Daftar Ahli</a>
-          <div class="h-6 w-px bg-white/20"></div>
-          <button class="bg-white text-masjidGreen px-4 py-1 rounded-full text-xs font-bold shadow-sm hover:bg-masjidGold transition">Log Keluar</button>
+        <div class="flex items-center space-x-4 text-xs font-bold uppercase">
+          <a href="index.html" class="hover:text-masjidGold transition hidden md:block">Utama</a>
+          <button onclick="location.reload()" class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
         </div>
       </div>
     </nav>
 
     <main class="container mx-auto mt-8 p-4">
-      <!-- Welcome Header -->
-      <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-          <h1 class="text-2xl font-extrabold text-gray-800">Panel Pengurusan Nazir</h1>
-          <p class="text-gray-500 italic text-sm">Selamat datang, Pengurus Masjid. Sila semak pendaftaran ahli kariah.</p>
+      
+      <!-- Dashboard Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-3xl shadow-sm border-l-8 border-masjidGreen">
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Jumlah Permohonan</p>
+          <h3 class="text-3xl font-black text-gray-800" id="stat-total">--</h3>
         </div>
-        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100">
-          <span class="h-2 w-2 bg-green-500 rounded-full animate-pulse"></span>
-          <span class="text-xs font-bold text-gray-700 uppercase tracking-tighter">Sistem Aktif (v2.0)</span>
+        <div class="bg-white p-6 rounded-3xl shadow-sm border-l-8 border-masjidGold">
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Kariah Berdaftar</p>
+          <h3 class="text-3xl font-black text-gray-800" id="stat-verified">--</h3>
         </div>
-      </div>
-
-      <!-- Stats Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-masjidGreen">
-          <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Jumlah Ahli</p>
-          <h3 class="text-3xl font-bold text-gray-800">1,240</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-red-500">
-          <p class="text-[10px] text-red-500 font-bold uppercase mb-1">Perlu Pengesahan</p>
-          <h3 class="text-3xl font-bold text-red-600">08</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-masjidGold">
-          <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Zon Kariah</p>
-          <h3 class="text-3xl font-bold text-gray-800">05</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-blue-500">
-          <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Bantuan Aktif</p>
-          <h3 class="text-3xl font-bold text-gray-800">12</h3>
+        <div class="bg-white p-6 rounded-3xl shadow-sm border-l-8 border-blue-500">
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Data Geo-Location</p>
+          <h3 class="text-3xl font-black text-gray-800" id="stat-geo">--</h3>
         </div>
       </div>
 
-      <!-- Main Management Area -->
-      <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-        <!-- Tabs & Filters -->
-        <div class="p-4 border-b border-gray-100 bg-masjidGreen flex flex-wrap items-center justify-between gap-4">
-          <div class="flex space-x-8 text-xs text-white/70">
-            <button class="pb-2 tab-active" onclick="filterTable('all')">Semua Ahli</button>
-            <button class="pb-2 hover:text-white font-medium relative" onclick="filterTable('pending')">
-              Belum Disahkan
-              <span class="absolute -top-2 -right-4 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">8</span>
-            </button>
-            <button class="pb-2 hover:text-white font-medium" onclick="filterTable('verified')">Telah Disahkan</button>
-          </div>
-          <div class="flex gap-2">
-            <div class="relative">
-              <input type="text" id="search-input" class="pl-10 pr-4 py-2 text-xs border border-transparent rounded-lg focus:ring-2 focus:ring-masjidGold outline-none w-64 bg-white/10 text-white placeholder-white/50" placeholder="Cari Nama / No. IC...">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white/50 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
+      <!-- Controls -->
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+        <div class="relative w-full md:w-96">
+            <input type="text" id="searchInput" onkeyup="searchTable()" class="w-full pl-12 pr-4 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-masjidGreen outline-none text-sm" placeholder="Cari Nama atau No. IC...">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-300 absolute left-4 top-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
         </div>
+        <button onclick="exportToExcel()" class="bg-masjidGreen text-white px-6 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-masjidDark transition w-full md:w-auto">
+            Muat Turun Excel
+        </button>
+      </div>
 
-        <!-- Table -->
+      <!-- Table Card -->
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
         <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-bold tracking-widest border-b border-gray-100">
+          <table class="w-full text-left border-collapse" id="adminTable">
+            <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold tracking-[0.2em] border-b">
               <tr>
-                <th class="px-6 py-5">Ketua Keluarga / IC</th>
-                <th class="px-6 py-5">Hubungi / Bil Air</th>
-                <th class="px-6 py-5">Status Nazir</th>
-                <th class="px-6 py-5 text-right">Tindakan Pengurusan</th>
+                <th class="px-6 py-4">Tarikh / Nama / IC</th>
+                <th class="px-6 py-4">Hubungi / Bil Air</th>
+                <th class="px-6 py-4">Alamat / Lot</th>
+                <th class="px-6 py-4 text-center">Lokasi</th>
+                <th class="px-6 py-4 text-right">Tindakan</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100" id="member-table-body">
-              <!-- Pending Member -->
-              <tr class="hover:bg-green-50/30 transition member-row" data-status="pending">
-                <td class="px-6 py-5">
-                  <div class="flex flex-col">
-                    <span class="font-bold text-gray-800 uppercase">Mohammad Syahmi Bin Roslan</span>
-                    <span class="text-xs text-gray-400 font-mono">950412-10-5541</span>
-                    <span class="text-[9px] mt-1 bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full w-fit">Zon 2 - Jalan Utama</span>
-                  </div>
-                </td>
-                <td class="px-6 py-5">
-                  <div class="text-xs">
-                    <div class="font-bold text-gray-700">011-23456789</div>
-                    <div class="text-gray-400 mt-0.5">Air: AS-887766554</div>
-                  </div>
-                </td>
-                <td class="px-6 py-5">
-                  <span class="flex items-center gap-1 text-red-600 text-[10px] font-bold px-3 py-1 rounded-full bg-red-50 border border-red-100 w-fit uppercase">
-                    Belum Disahkan
-                  </span>
-                </td>
-                <td class="px-6 py-5 text-right">
-                  <button class="bg-masjidGreen hover:bg-masjidDark text-white text-[10px] px-4 py-2 rounded-lg font-extrabold shadow-sm transition uppercase tracking-wider" onclick="showChecklist('SYAHMI')">
-                    Semakan Nazir
-                  </button>
-                </td>
-              </tr>
-              <!-- Verified Member -->
-              <tr class="hover:bg-green-50/30 transition member-row" data-status="verified">
-                <td class="px-6 py-5">
-                  <div class="flex flex-col">
-                    <span class="font-bold text-gray-800 uppercase">Haji Ibrahim Bin Musa</span>
-                    <span class="text-xs text-gray-400 font-mono">600101-08-4431</span>
-                    <span class="text-[9px] mt-1 bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full w-fit">Zon 1 - Lorong Masjid</span>
-                  </div>
-                </td>
-                <td class="px-6 py-5">
-                  <div class="text-xs">
-                    <div class="font-bold text-gray-700">012-99887766</div>
-                    <div class="text-gray-400 mt-0.5">Air: AS-11223344</div>
-                  </div>
-                </td>
-                <td class="px-6 py-5">
-                  <span class="flex items-center gap-1 text-masjidGreen text-[10px] font-bold px-3 py-1 rounded-full bg-green-50 border border-green-100 w-fit uppercase">
-                    Disahkan
-                  </span>
-                </td>
-                <td class="px-6 py-5 text-right">
-                  <div class="flex justify-end gap-2">
-                    <a href="sijil.html?name=HAJI IBRAHIM BIN MUSA&ic=600101-08-4431&water=AS-11223344" class="bg-white text-masjidGreen text-[10px] px-4 py-2 rounded-lg font-extrabold border border-masjidGreen shadow-sm hover:bg-masjidGreen hover:text-white transition uppercase tracking-wider">
-                      Cetak Sijil
-                    </a>
-                    <button class="bg-gray-100 text-gray-500 p-2 rounded-lg hover:bg-red-50 hover:text-red-600 transition">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+            <tbody class="divide-y divide-gray-100 text-sm" id="tableBody">
+                <!-- Loading State -->
+                <tr>
+                    <td colspan="5" class="px-6 py-20 text-center">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-masjidGreen mx-auto mb-4"></div>
+                        <p class="text-gray-400 font-bold animate-pulse uppercase text-[10px] tracking-widest">Memuat Turun Data Dari Google Sheets...</p>
+                    </td>
+                </tr>
             </tbody>
           </table>
         </div>
       </div>
     </main>
 
-    <!-- Checklist Modal -->
-    <div id="modal-checklist" class="hidden fixed inset-0 bg-masjidGreen/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl border border-masjidGold/20">
-        <div class="bg-masjidGreen p-6 text-white text-center">
-          <img src="logo_masjid.png" alt="Logo" class="h-12 mx-auto mb-4 brightness-0 invert opacity-50" onerror="this.src='https://via.placeholder.com/40x40?text=MKSLB'">
-          <h3 class="font-bold text-lg uppercase tracking-widest">Semakan & Checklist Nazir</h3>
+    <!-- Modal Detail Ahli -->
+    <div id="memberModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-masjidGreen p-6 text-white flex justify-between items-center">
+                <h3 class="font-bold uppercase tracking-widest text-sm">Semakan Detail Kariah</h3>
+                <button onclick="closeModal()" class="text-white/50 hover:text-white">✕</button>
+            </div>
+            <div class="p-8 space-y-4" id="modalContent">
+                <!-- Content Injected via JS -->
+            </div>
+            <div class="p-6 bg-gray-50 flex gap-3">
+                <button onclick="closeModal()" class="flex-1 py-3 bg-gray-200 text-gray-600 rounded-xl font-bold uppercase text-[10px]">Tutup</button>
+                <button onclick="printRecord()" class="flex-1 py-3 bg-masjidGold text-masjidGreen rounded-xl font-bold uppercase text-[10px]">Cetak Rekod</button>
+            </div>
         </div>
-        <div class="p-8 space-y-4">
-          <p class="text-sm text-gray-600 text-center">Sila sahkan maklumat ahli <strong id="modal-name">SYAHMI</strong></p>
-          <div class="space-y-3">
-            <label class="flex items-start gap-4 p-4 border rounded-2xl hover:bg-gray-50 cursor-pointer transition">
-              <input type="checkbox" class="mt-1 w-5 h-5 text-masjidGreen border-gray-300 rounded focus:ring-masjidGreen">
-              <div class="text-xs">
-                <span class="font-extrabold block text-gray-800 uppercase">Kad Pengenalan & No. Air</span>
-                <span class="text-gray-400 italic">Data sepadan dengan dokumen yang dimuat naik.</span>
-              </div>
-            </label>
-            <label class="flex items-start gap-4 p-4 border rounded-2xl hover:bg-gray-50 cursor-pointer transition">
-              <input type="checkbox" class="mt-1 w-5 h-5 text-masjidGreen border-gray-300 rounded focus:ring-masjidGreen">
-              <div class="text-xs">
-                <span class="font-extrabold block text-gray-800 uppercase">Status Pemastautin</span>
-                <span class="text-gray-400 italic">Disahkan tinggal dalam zon kariah MKSLB.</span>
-              </div>
-            </label>
-          </div>
-          <div class="pt-6 flex flex-col gap-3">
-            <button class="w-full bg-masjidGreen text-white font-extrabold py-4 rounded-2xl hover:bg-masjidDark transition shadow-lg shadow-green-900/20 uppercase tracking-widest" onclick="confirmVerify()">Sahkan & Pindah Data</button>
-            <button class="w-full bg-gray-100 text-gray-400 font-bold py-3 rounded-2xl hover:bg-gray-200 transition text-sm uppercase" onclick="closeChecklist()">Batalkan Semakan</button>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <footer class="mt-20 bg-gray-100 text-gray-400 py-10 px-4 border-t border-gray-200">
-      <div class="container mx-auto text-center">
-        <p class="font-bold mb-1 text-masjidGreen uppercase tracking-widest text-[10px]">Masjid Kampung Sungai Lang Baru (MKSLB)</p>
-        <p class="text-[10px] mb-2">Kampung Sungai Lang Baru, 42700 Banting, Selangor | Hubungi: 03-3181 1994</p>
-        <p class="text-[9px] uppercase tracking-[0.4em]">Panel Pengurusan Ahli Kariah Digital</p>
-      </div>
+    <footer class="mt-20 py-10 text-center">
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">Hak Cipta Terpelihara &copy; 2026 MKSLB</p>
     </footer>
 
     <script>
-      function showChecklist(name) {
-        document.getElementById('modal-name').innerText = name;
-        document.getElementById('modal-checklist').classList.remove('hidden');
+      // Sila tukar URL ini kepada URL 'doGet' GAS anda
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzV8lhqZ_Ij_tK92MVbYaorq8iQ1wvMQIGNZLzLoALiV7Rn75DoBVnzwwktv6UO7_kYug/exec';
+
+      let allData = [];
+
+      // Ambil Data dari Google Sheets (Memerlukan doGet(e) di Apps Script)
+      async function fetchData() {
+        try {
+          const response = await fetch(scriptURL + '?action=read');
+          const data = await response.json();
+          allData = data.slice(1); // Buang header row
+          renderTable(allData);
+          updateStats(allData);
+        } catch (error) {
+          console.error("Gagal ambil data:", error);
+          // Paparan contoh jika fetch gagal (untuk tujuan demo UI)
+          document.getElementById('tableBody').innerHTML = `
+            <tr>
+                <td colspan="5" class="px-6 py-10 text-center text-red-500 font-bold">
+                    Gagal menyambung ke database. Sila pastikan 'doGet' telah dikemaskini di GAS.
+                </td>
+            </tr>`;
+        }
       }
-      function closeChecklist() { document.getElementById('modal-checklist').classList.add('hidden'); }
-      function confirmVerify() {
-        alert('Data telah disahkan oleh Nazir dan Sijil Keahlian kini tersedia.');
-        closeChecklist();
+
+      function updateStats(data) {
+          document.getElementById('stat-total').innerText = data.length;
+          document.getElementById('stat-verified').innerText = data.length; // Anda boleh tambah filter status jika perlu
+          document.getElementById('stat-geo').innerText = data.filter(d => d[6] && d[7]).length;
       }
-      function filterTable(status) {
-        const rows = document.querySelectorAll('.member-row');
-        const buttons = document.querySelectorAll('.pb-2');
-        buttons.forEach(btn => btn.classList.remove('tab-active', 'text-white'));
-        event.target.classList.add('tab-active');
-        rows.forEach(row => {
-          if (status === 'all') row.style.display = '';
-          else row.style.display = row.getAttribute('data-status') === status ? '' : 'none';
+
+      function renderTable(data) {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+
+        data.forEach((row, index) => {
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-green-50/50 transition cursor-pointer";
+          
+          // Row format: [Timestamp, Nama, IC, Tel, Alamat, Lot, Lat, Lng, BilAir]
+          tr.innerHTML = `
+            <td class="px-6 py-5">
+                <div class="text-[9px] text-gray-400 mb-1 font-mono">${new Date(row[0]).toLocaleDateString('ms-MY')}</div>
+                <div class="font-bold text-gray-800 uppercase">${row[1]}</div>
+                <div class="text-[11px] text-gray-500 font-mono">${row[2]}</div>
+            </td>
+            <td class="px-6 py-5">
+                <div class="font-bold text-masjidGreen">${row[3]}</div>
+                <div class="text-[10px] text-gray-400">Air: ${row[8]}</div>
+            </td>
+            <td class="px-6 py-5">
+                <div class="text-[11px] font-medium text-gray-600 line-clamp-1 max-w-[200px]">${row[4]}</div>
+                <div class="text-[10px] font-bold text-masjidGold uppercase">${row[5]}</div>
+            </td>
+            <td class="px-6 py-5 text-center">
+                ${row[6] ? 
+                  `<a href="https://www.google.com/maps?q=${row[6]},${row[7]}" target="_blank" class="inline-block p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </a>` : '<span class="text-gray-300">-</span>'}
+            </td>
+            <td class="px-6 py-5 text-right">
+                <button onclick="viewDetails(${index})" class="text-[10px] font-bold bg-gray-100 hover:bg-masjidGreen hover:text-white px-4 py-2 rounded-lg transition uppercase tracking-widest">Detail</button>
+            </td>
+          `;
+          tableBody.appendChild(tr);
         });
       }
-      document.getElementById('search-input').addEventListener('keyup', function() {
-        const filter = this.value.toLowerCase();
-        document.querySelectorAll('.member-row').forEach(row => {
-          row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none';
-        });
-      });
+
+      function searchTable() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allData.filter(row => 
+            row[1].toLowerCase().includes(input) || row[2].includes(input)
+        );
+        renderTable(filtered);
+      }
+
+      function viewDetails(index) {
+          const row = allData[index];
+          const content = `
+            <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-2xl">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Nama Penuh</p>
+                    <p class="font-bold text-gray-800 uppercase text-sm">${row[1]}</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-2xl">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">No. IC</p>
+                        <p class="font-bold text-gray-800 text-sm">${row[2]}</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-2xl">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Telefon</p>
+                        <p class="font-bold text-gray-800 text-sm">${row[3]}</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-2xl">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Alamat Penuh</p>
+                    <p class="font-medium text-gray-700 text-xs">${row[4]}</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-2xl">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">No. Lot JUPEM</p>
+                        <p class="font-bold text-gray-800 text-sm">${row[5]}</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-2xl">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Akaun Bil Air</p>
+                        <p class="font-bold text-gray-800 text-sm">${row[8]}</p>
+                    </div>
+                </div>
+            </div>
+          `;
+          document.getElementById('modalContent').innerHTML = content;
+          document.getElementById('memberModal').classList.remove('hidden');
+      }
+
+      function closeModal() {
+          document.getElementById('memberModal').classList.add('hidden');
+      }
+
+      // Jalankan fungsi fetch bila page load
+      window.onload = fetchData;
+
     </script>
   </body>
 </html>
